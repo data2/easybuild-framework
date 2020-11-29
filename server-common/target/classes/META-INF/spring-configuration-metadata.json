@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "easy.context",
+      "type": "com.data2.easybuild.server.common.env.DebugConfiguration",
+      "sourceType": "com.data2.easybuild.server.common.env.DebugConfiguration"
+    },
+    {
+      "name": "easy.swagger",
+      "type": "com.data2.easybuild.server.common.swagger.SwaggerConfiguration",
+      "sourceType": "com.data2.easybuild.server.common.swagger.SwaggerConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "easy.context.debug",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.data2.easybuild.server.common.env.DebugConfiguration"
+    },
+    {
+      "name": "easy.context.pretty",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.data2.easybuild.server.common.env.DebugConfiguration"
+    },
+    {
+      "name": "easy.swagger.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.data2.easybuild.server.common.swagger.SwaggerConfiguration"
+    },
+    {
+      "name": "easy.swagger.profile",
+      "type": "java.lang.String",
+      "sourceType": "com.data2.easybuild.server.common.swagger.SwaggerConfiguration"
+    },
+    {
+      "name": "easy.swagger.server-context-configuration",
+      "type": "com.data2.easybuild.server.common.env.ServerContextConfiguration",
+      "sourceType": "com.data2.easybuild.server.common.swagger.SwaggerConfiguration"
+    }
+  ],
+  "hints": []
+}
