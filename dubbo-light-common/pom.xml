@@ -18,12 +18,12 @@
         </dependency>
         <dependency>
             <groupId>com.data2.easybuild</groupId>
-            <artifactId>common-configuration</artifactId>
+            <artifactId>configuration-common</artifactId>
             <version>${parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.data2.easybuild</groupId>
-            <artifactId>common-api</artifactId>
+            <artifactId>api-common</artifactId>
             <version>${parent.version}</version>
         </dependency>
 

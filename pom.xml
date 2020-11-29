@@ -11,10 +11,10 @@
 
     <modules>
         <module>server-common</module>
-        <module>common-api</module>
+        <module>api-common</module>
         <module>dubbo-light-common</module>
         <module>example</module>
-        <module>common-configuration</module>
+        <module>configuration-common</module>
     </modules>
 
 

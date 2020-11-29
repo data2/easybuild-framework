@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-configuration" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configuration-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dubbo-light-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dubbo-light-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/example" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server-common" charset="UTF-8" />
+  </component>
+</project>
