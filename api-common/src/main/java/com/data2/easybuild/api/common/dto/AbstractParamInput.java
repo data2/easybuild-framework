@@ -11,4 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public abstract class AbstractParamInput implements Input{
+    @Override
+    public void check() {
+    }
 }

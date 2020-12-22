@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 /**
  * @author data2
  * @description
@@ -19,10 +21,11 @@ public abstract class AbstractRestRequest extends AbstractRequest {
 
     @Override
     public void check() {
-        if (clientParam!=null){
+        super.check();
+        if (!Objects.isNull(clientParam)){
             clientParam.check();
         }
-        if (userParam!=null){
+        if (!Objects.isNull(userParam)){
             userParam.check();
         }
     }

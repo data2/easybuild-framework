@@ -15,8 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientParam extends AbstractParamInput {
+    private String clientType;
+    private String clientVersion;
+    private String clientIp;
     @Override
     public void check() {
-
+        super.check();
     }
 }

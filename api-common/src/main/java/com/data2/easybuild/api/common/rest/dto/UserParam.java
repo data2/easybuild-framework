@@ -15,8 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserParam extends AbstractParamInput {
+    private String userCode;
+    private String userId;
+    private String userType;
     @Override
     public void check() {
-
+        super.check();
     }
 }
