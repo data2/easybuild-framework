@@ -11,4 +11,9 @@ public class ContextConst {
     public static final String SYSTEM_ENVIRONMENT = "systemEnvironment";
     public static final String APPLICATION_CONFIG = "applicationConfig";
 
+    public static final String DEV = "dev";
+    public static final String TEST = "test";
+
+
+
 }
