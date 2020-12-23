@@ -7,4 +7,5 @@ package com.data2.easybuild.server.common.aop;
  */
 
 public abstract class AbstractRestAop extends AbstractOpenApiAop {
+
 }

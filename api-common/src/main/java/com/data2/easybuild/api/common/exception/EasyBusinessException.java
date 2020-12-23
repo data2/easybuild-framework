@@ -6,6 +6,8 @@ package com.data2.easybuild.api.common.exception;
  * @date 2020/11/29 下午9:15
  */
 public class EasyBusinessException extends RuntimeException {
+
+    private FrontendCare frontendCare;
     /**
      * 无参构造函数
      */
@@ -36,6 +38,10 @@ public class EasyBusinessException extends RuntimeException {
      */
     public EasyBusinessException(Throwable cause) {
         super(cause);
+    }
+
+    public static EasyBusinessException build(String msg){
+        return new EasyBusinessException(msg);
     }
 
 }
