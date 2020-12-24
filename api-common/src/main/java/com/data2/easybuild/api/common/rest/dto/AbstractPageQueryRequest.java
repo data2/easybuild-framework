@@ -2,7 +2,6 @@ package com.data2.easybuild.api.common.rest.dto;
 
 import com.data2.easybuild.api.common.dto.PageParam;
 import com.data2.easybuild.api.common.utils.ParamUtil;
-import com.sun.javafx.tools.packager.Param;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public abstract class AbstractQueryRequest extends AbstractRestRequest {
 }

@@ -6,6 +6,7 @@ package com.data2.easybuild.server.common.aop;
  * @date 2020/11/27 下午9:30
  */
 
+import com.alibaba.fastjson.JSON;
 import com.data2.easybuild.api.common.dto.AbstractRequest;
 import com.data2.easybuild.api.common.exception.EasyBusinessException;
 import com.data2.easybuild.api.common.rest.dto.AbstractRestRequest;
@@ -27,6 +28,8 @@ import java.util.Date;
  */
 @Slf4j
 public abstract class AbstractOpenApiAop {
+
+    public abstract void apiPointCut();
 
     public Object doApi(ProceedingJoinPoint proceedingJoinPoint){
         Date start = new Date();
@@ -62,14 +65,22 @@ public abstract class AbstractOpenApiAop {
         }
     }
 
-    protected void failLog(Date start, AbstractRequest request, Throwable throwable){
+    protected void failLog(Date start, AbstractRequest request, EasyBusinessException throwable){
         ServerLog serverLog = new ServerLog();
-        log.info("失败日志:{}", serverLog);
+        serverLog.setInterfaceCostTime((System.currentTimeMillis() - start.getTime()) / 1000);
+        serverLog.setErrMsg(throwable.getMessage());
+        serverLog.setRequest(request.getClass().getName());
+        serverLog.setUuid(request.getUuid());
+        log.info("失败日志:{}", JSON.toJSONString(serverLog));
     }
 
     private void okLog(Date start, AbstractRequest request, Object response){
         ServerLog serverLog = new ServerLog();
-        log.info("成功日志:{}", serverLog);
+        serverLog.setInterfaceCostTime((System.currentTimeMillis() - start.getTime()) / 1000);
+        serverLog.setRequest(request.getClass().getName());
+        serverLog.setUuid(request.getUuid());
+        serverLog.setResponse(JSON.toJSONString(response));
+        log.info("成功日志:{}", JSON.toJSONString(serverLog));
     }
 
 }

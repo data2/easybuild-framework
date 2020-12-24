@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 public class ServerLog {
     private String uuid;
-    private Date date;
+    private long interfaceCostTime;
     private String clientIp;
     private String clientType;
     private String serverIp;

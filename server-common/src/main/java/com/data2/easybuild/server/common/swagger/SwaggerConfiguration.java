@@ -2,8 +2,6 @@ package com.data2.easybuild.server.common.swagger;
 
 import com.data2.easybuild.server.common.env.ServerContextConfiguration;
 import com.data2.easybuild.server.common.env.SpringContextConfiguration;
-import com.sun.deploy.util.ArrayUtil;
-import com.sun.tools.javac.util.ArrayUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -17,7 +15,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Objects;
 
 import static com.data2.easybuild.server.common.consts.ContextConst.DEV;

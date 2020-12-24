@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class PageParam extends AbstractParamInput{
     @Override
     public void check() {
