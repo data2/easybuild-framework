@@ -1,5 +1,7 @@
 package com.data2.easybuild.server.common.env;
 
+import java.util.HashMap;
+
 /**
  * @author data2
  * @description
@@ -7,4 +9,13 @@ package com.data2.easybuild.server.common.env;
  */
 
 public class RequestContext {
+    private static ThreadLocal<HashMap<String,String>> threadLocal = new ThreadLocal<>();
+    public static void addHeaders(HashMap<String, String> param) {
+        threadLocal.set(param);
+    }
+
+
+    public static void rmHeaders() {
+        threadLocal.remove();
+    }
 }
