@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 开放接口（RPC或REST API） 服务端统一处理切面
@@ -31,18 +32,29 @@ public abstract class AbstractOpenApiAop {
 
     public abstract void apiPointCut();
 
-    public Object doApi(ProceedingJoinPoint proceedingJoinPoint){
+    public Object doApi(ProceedingJoinPoint proceedingJoinPoint) {
         Date start = new Date();
-        AbstractRequest request = (AbstractRequest) proceedingJoinPoint.getArgs()[0];
+        AbstractRequest request = null;
         try {
-            request.check();
+            Boolean gotFirstInput = false;
+            Object[] args = proceedingJoinPoint.getArgs();
+            if (!Objects.isNull(args) && args.length > 0) {
+                for (Object arg : args) {
+                    if (arg instanceof AbstractRequest) {
+                        ((AbstractRequest) arg).check();
+                        if (!gotFirstInput) {
+                            request = (AbstractRequest) arg;
+                        }
+                    }
+                }
+            }
             Object response = proceedingJoinPoint.proceed();
-            okLog(start,request,response);
+            okLog(start, request, response);
             return response;
-        }catch (Throwable throwable) {
+        } catch (Throwable throwable) {
             EasyBusinessException exception = tranformException(throwable);
             failLog(start, request, exception);
-            if (request instanceof AbstractRestRequest){
+            if (request instanceof AbstractRestRequest) {
                 return RestResponse.fail("1", exception.getMessage());
             }
             return null;
@@ -51,34 +63,34 @@ public abstract class AbstractOpenApiAop {
     }
 
     private EasyBusinessException tranformException(Throwable throwable) {
-        if (throwable instanceof EasyBusinessException){
-            return (EasyBusinessException)throwable;
+        if (throwable instanceof EasyBusinessException) {
+            return (EasyBusinessException) throwable;
         }
-        if (throwable instanceof NullPointerException){
+        if (throwable instanceof NullPointerException) {
             return EasyBusinessException.build("空指针异常");
-        }else if (throwable instanceof IllegalArgumentException){
+        } else if (throwable instanceof IllegalArgumentException) {
             return EasyBusinessException.build("不合法参数异常");
-        }else if (throwable instanceof ArrayIndexOutOfBoundsException){
+        } else if (throwable instanceof ArrayIndexOutOfBoundsException) {
             return EasyBusinessException.build("数组越界异常");
-        }else {
+        } else {
             return EasyBusinessException.build("异常");
         }
     }
 
-    protected void failLog(Date start, AbstractRequest request, EasyBusinessException throwable){
+    protected void failLog(Date start, AbstractRequest request, EasyBusinessException throwable) {
         ServerLog serverLog = new ServerLog();
         serverLog.setInterfaceCostTime((System.currentTimeMillis() - start.getTime()) / 1000);
         serverLog.setErrMsg(throwable.getMessage());
-        serverLog.setRequest(request.getClass().getName());
-        serverLog.setUuid(request.getUuid());
+        serverLog.setRequest(request != null ? request.getClass().getName() : null);
+        serverLog.setUuid(request != null ? request.getUuid() : null);
         log.info("失败日志:{}", JSON.toJSONString(serverLog));
     }
 
-    private void okLog(Date start, AbstractRequest request, Object response){
+    private void okLog(Date start, AbstractRequest request, Object response) {
         ServerLog serverLog = new ServerLog();
         serverLog.setInterfaceCostTime((System.currentTimeMillis() - start.getTime()) / 1000);
-        serverLog.setRequest(request.getClass().getName());
-        serverLog.setUuid(request.getUuid());
+        serverLog.setRequest(request != null ? request.getClass().getName() : null);
+        serverLog.setUuid(request != null ? request.getUuid() : null);
         serverLog.setResponse(JSON.toJSONString(response));
         log.info("成功日志:{}", JSON.toJSONString(serverLog));
     }
