@@ -1,4 +1,4 @@
-package com.data2.easybuild.server.common.lock;
+package com.data2.easybuild.server.common.seq;
 
 /**
  * @author data2

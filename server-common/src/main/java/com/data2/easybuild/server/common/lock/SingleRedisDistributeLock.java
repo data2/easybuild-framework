@@ -16,12 +16,16 @@ import redis.clients.jedis.params.SetParams;
 @Slf4j
 @ConfigurationProperties(prefix = "easy.lock.redis")
 @ConditionalOnProperty(name = "open", prefix = "easy.lock.redis", havingValue = "true")
-public class RedisDistributeLock {
+public class SingleRedisDistributeLock {
     private long timeout;
     private long expireTime;
     private JedisPool jedisPool;
 
-    SetParams setParams = SetParams.setParams().nx().px(expireTime);
+    private SetParams setParams = SetParams.setParams().nx().px(expireTime);
+
+    public boolean tryLock(String key, String val) {
+        return tryLock(key, val, timeout);
+    }
 
     public boolean tryLock(String key, String val, long timeoutParam) {
 

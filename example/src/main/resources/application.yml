@@ -15,6 +15,7 @@ easy:
   context:
     debug: false
     pretty: false
-
-
+  lock:
+    redis:
+      open: true
 
