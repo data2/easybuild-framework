@@ -13,9 +13,24 @@ easy:
     enable: true
     profile: test
   context:
-    debug: false
+    debug: true
     pretty: false
   lock:
     redis:
       open: true
+      host: localhost
+      port: 6379
+      maxTotal:
+      maxIdle:
+      minIdle:
+  http:
+    connect-timeout: 30000
+    connection-request-timeout: 30000
+    socket-timeout: 60000
+    max-total: 200
+    default-max-per-route: 200
+
+
+
+
 
