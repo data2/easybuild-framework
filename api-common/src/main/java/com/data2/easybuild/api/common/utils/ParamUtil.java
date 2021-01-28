@@ -14,4 +14,11 @@ public class ParamUtil {
             throw new EasyInvalidArgsException(message);
         }
     }
+
+    public static <T> T isNull(T object, T defaultVal) {
+        if (object == null){
+            return defaultVal;
+        }
+        return object;
+    }
 }
