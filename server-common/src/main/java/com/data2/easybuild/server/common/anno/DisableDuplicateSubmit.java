@@ -1,4 +1,4 @@
-package com.data2.easybuild.server.common.dup;
+package com.data2.easybuild.server.common.anno;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
