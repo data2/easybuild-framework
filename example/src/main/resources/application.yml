@@ -31,6 +31,8 @@ easy:
     default-max-per-route: 200
   cors:
     enable: true
+    allowOrigin: www.test1.com,www.test2.comx
+
 
 
 
