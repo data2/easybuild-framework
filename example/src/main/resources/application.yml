@@ -29,6 +29,8 @@ easy:
     socket-timeout: 60000
     max-total: 200
     default-max-per-route: 200
+  cors:
+    enable: true
 
 
 
