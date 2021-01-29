@@ -11,12 +11,20 @@ import com.data2.easybuild.api.common.dto.AbstractRequest;
 import com.data2.easybuild.api.common.exception.EasyBusinessException;
 import com.data2.easybuild.api.common.rest.dto.AbstractRestRequest;
 import com.data2.easybuild.api.common.rest.dto.RestResponse;
+import com.data2.easybuild.server.common.dup.DisableDuplicateSubmit;
 import com.data2.easybuild.server.common.env.ServerLog;
+import com.data2.easybuild.server.common.lock.RequestDupIntecept;
+import com.data2.easybuild.server.common.util.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.reflect.MethodSignature;
+import redis.clients.jedis.JedisPool;
 
 import java.util.Date;
 import java.util.Objects;
+
+import static com.data2.easybuild.server.common.dup.DupEnum.FRONT_ID;
+import static com.data2.easybuild.server.common.dup.DupEnum.REQUEST_HASH;
 
 /**
  * 开放接口（RPC或REST API） 服务端统一处理切面
@@ -48,6 +56,7 @@ public abstract class AbstractOpenApiAop {
                     }
                 }
             }
+            disableDup(proceedingJoinPoint,request);
             Object response = proceedingJoinPoint.proceed();
             okLog(start, request, response);
             return response;
@@ -60,6 +69,29 @@ public abstract class AbstractOpenApiAop {
             return null;
         } finally {
         }
+    }
+
+    protected void disableDup(ProceedingJoinPoint proceedingJoinPoint, AbstractRequest request) {
+        MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
+        DisableDuplicateSubmit anno = signature.getMethod().getDeclaredAnnotation(DisableDuplicateSubmit.class);
+        Class<?> cls = proceedingJoinPoint.getTarget().getClass();
+        if (anno == null) {
+            anno = cls.getDeclaredAnnotation(DisableDuplicateSubmit.class);
+        }
+        if (anno != null) {
+            String type = anno.type();
+            String timeout = anno.timeout();
+            String key = null;
+            if (type.equals(FRONT_ID.getVal())) {
+                key = request.getFrontID();
+            } else if (type.equals(REQUEST_HASH.getVal())) {
+                key = String.valueOf(request.toString().hashCode());
+            }
+            if (SpringContextHolder.getBean(RequestDupIntecept.class).intercept(key, timeout)){
+                throw new EasyBusinessException("重复提交");
+            }
+        }
+
     }
 
     private EasyBusinessException tranformException(Throwable throwable) {

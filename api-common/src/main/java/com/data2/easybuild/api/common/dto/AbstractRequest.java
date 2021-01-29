@@ -16,6 +16,8 @@ public abstract class AbstractRequest implements Input{
 
     private String uuid;
 
+    private String frontID;
+
     private Map<String,String> extra;
 
     @Override
