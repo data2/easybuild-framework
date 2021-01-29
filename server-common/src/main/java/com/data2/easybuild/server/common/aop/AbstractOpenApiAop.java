@@ -13,11 +13,15 @@ import com.data2.easybuild.api.common.rest.dto.AbstractRestRequest;
 import com.data2.easybuild.api.common.rest.dto.RestResponse;
 import com.data2.easybuild.server.common.dup.DisableDuplicateSubmit;
 import com.data2.easybuild.server.common.env.ServerLog;
+import com.data2.easybuild.server.common.env.SpringContextHolder;
 import com.data2.easybuild.server.common.lock.RequestDupIntecept;
-import com.data2.easybuild.server.common.util.SpringContextHolder;
+import com.data2.easybuild.server.common.util.IpUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.net.IPv6Utils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import redis.clients.jedis.JedisPool;
 
 import java.util.Date;
@@ -82,13 +86,13 @@ public abstract class AbstractOpenApiAop {
         if (anno != null) {
             String type = anno.type();
             String timeout = anno.timeout();
-            String key = null;
+            StringBuffer key = new StringBuffer(IpUtils.getIpAddr(((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()));
             if (type.equals(FRONT_ID.getVal())) {
-                key = request.getFrontID();
+                key.append(request.getFrontID());
             } else if (type.equals(REQUEST_HASH.getVal())) {
-                key = String.valueOf(request.toString().hashCode());
+                key.append(String.valueOf(request.toString().hashCode()));
             }
-            if (SpringContextHolder.getBean(RequestDupIntecept.class).intercept(key, timeout)){
+            if (SpringContextHolder.getBean(RequestDupIntecept.class).intercept(key.toString(), timeout)){
                 throw new EasyBusinessException("重复提交");
             }
         }
