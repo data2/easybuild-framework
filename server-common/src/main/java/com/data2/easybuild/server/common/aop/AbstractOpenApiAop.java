@@ -29,6 +29,7 @@ import static com.data2.easybuild.server.common.dup.DupEnum.REQUEST_HASH;
 /**
  * 开放接口（RPC或REST API） 服务端统一处理切面
  * - 入参校验：接口请求入参校验
+ * - 防重复提交
  * - 流控校验：服务器流控校验
  * - 优雅停机：接口处理前计数器加1，处理后减1
  * - 数据加锁：RedisLock
