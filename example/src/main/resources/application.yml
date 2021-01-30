@@ -16,8 +16,8 @@ easy:
     debug: true
     pretty: false
   lock:
-    redis:
-      open: true
+    open: true
+  redis:
       host: localhost
       port: 6379
       maxTotal:
@@ -32,6 +32,7 @@ easy:
   cors:
     enable: true
     allowOrigin: www.test1.com,www.test2.comx
+
 
 
 

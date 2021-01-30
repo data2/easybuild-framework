@@ -3,6 +3,7 @@ package com.data2.easybuild.server.common.lock;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -14,6 +15,7 @@ import redis.clients.jedis.JedisPool;
  */
 @Slf4j
 @Component
+@ConditionalOnBean(JedisPool.class)
 public class RequestDupIntecept {
     @Autowired
     private JedisPool jedisPool;

@@ -15,6 +15,8 @@
         <module>dubbo-light-common</module>
         <module>example</module>
         <module>configuration-common</module>
+        <module>redis-common</module>
+        <module>rocketmq-common</module>
     </modules>
 
 
@@ -31,6 +33,8 @@
         <jetcache-starter-redis.version>2.5.12</jetcache-starter-redis.version>
         <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
         <dubbo.version>2.7.7</dubbo.version>
+        <redisson.version>3.10.1</redisson.version>
+        <jedis.version>3.0.1</jedis.version>
     </properties>
 
     <dependencyManagement>
@@ -100,6 +104,17 @@
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo</artifactId>
                 <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

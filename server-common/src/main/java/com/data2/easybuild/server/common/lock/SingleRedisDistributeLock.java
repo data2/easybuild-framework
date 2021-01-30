@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +19,8 @@ import redis.clients.jedis.params.SetParams;
  */
 @Slf4j
 @Configuration
-@ConfigurationProperties(prefix = "easy.lock.redis")
-@ConditionalOnProperty(name = "open", prefix = "easy.lock.redis", havingValue = "true")
+@ConditionalOnBean(JedisPool.class)
+@ConditionalOnProperty(name = "open", prefix = "easy.lock", havingValue = "true")
 public class SingleRedisDistributeLock {
     private long timeout;
     private long expireTime;
