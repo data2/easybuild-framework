@@ -2,7 +2,6 @@ package com.data2.easybuild.server.common.lock;
 
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,10 +19,13 @@ import redis.clients.jedis.params.SetParams;
 @Slf4j
 @Configuration
 @ConditionalOnBean(JedisPool.class)
+@ConfigurationProperties(prefix = "easy.lock")
 @ConditionalOnProperty(name = "open", prefix = "easy.lock", havingValue = "true")
 public class SingleRedisDistributeLock {
+
     private long timeout;
     private long expireTime;
+
     @Autowired
     private JedisPool jedisPool;
 
@@ -60,7 +62,7 @@ public class SingleRedisDistributeLock {
         return false;
     }
 
-    public boolean unlock(String key, String  val){
+    public boolean unlock(String key, String val) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();

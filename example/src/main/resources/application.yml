@@ -15,8 +15,10 @@ easy:
   context:
     debug: true
     pretty: false
-  lock:
+  lock: # 是否注册分布式锁 SingleRedisDistributeLock
     open: true
+    timeout: 5000 # 获取锁超时时间
+    expireTime: 10000 #失效时间
   redis:
       host: localhost
       port: 6379
