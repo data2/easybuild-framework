@@ -22,7 +22,7 @@ easy:
     timeout: 5000 # 获取锁超时时间
     expireTime: 10000 #失效时间
   redis:
-      host: localhost
+      host:
       port: 6379
       maxTotal:
       maxIdle:
