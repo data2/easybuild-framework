@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -16,6 +17,7 @@ import redis.clients.jedis.JedisPool;
 @Slf4j
 @Component
 @ConditionalOnBean(JedisPool.class)
+@ConditionalOnProperty(prefix = "easy.dup", name = "open", havingValue = "true")
 public class RequestDupIntecept {
     @Autowired
     private JedisPool jedisPool;
