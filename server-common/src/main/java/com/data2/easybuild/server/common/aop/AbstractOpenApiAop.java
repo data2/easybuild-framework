@@ -25,9 +25,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import java.util.Date;
 import java.util.Objects;
 
-import static com.data2.easybuild.server.common.dup.DupEnum.FRONT_ID;
-import static com.data2.easybuild.server.common.dup.DupEnum.REQUEST_HASH;
-
 /**
  * 开放接口（RPC或REST API） 服务端统一处理切面
  * - 入参校验：接口请求入参校验
@@ -59,7 +56,7 @@ public abstract class AbstractOpenApiAop {
                     }
                 }
             }
-            disableDup(proceedingJoinPoint,request);
+            disableDup(proceedingJoinPoint, request);
             Object response = proceedingJoinPoint.proceed();
             okLog(start, request, response);
             return response;
@@ -82,15 +79,16 @@ public abstract class AbstractOpenApiAop {
             anno = cls.getDeclaredAnnotation(DisableDuplicateSubmit.class);
         }
         if (anno != null) {
-            String type = anno.type();
-            String timeout = anno.timeout();
             StringBuffer key = new StringBuffer(IpUtils.getIpAddr(((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()));
-            if (type.equals(FRONT_ID.getVal())) {
-                key.append(request.getFrontID());
-            } else if (type.equals(REQUEST_HASH.getVal())) {
-                key.append(String.valueOf(request.toString().hashCode()));
+            switch (anno.type()) {
+                case FRONT_ID:
+                    key.append(request.getFrontID());
+                    break;
+                case REQUEST_HASH:
+                    key.append(String.valueOf(request.toString().hashCode()));
+                    break;
             }
-            if (SpringContextHolder.getBean(RequestDupIntecept.class).intercept(key.toString(), timeout)){
+            if (SpringContextHolder.getBean(RequestDupIntecept.class).intercept(key.toString(), String.valueOf(anno.timeout()))) {
                 throw new EasyBusinessException("重复提交");
             }
         }
