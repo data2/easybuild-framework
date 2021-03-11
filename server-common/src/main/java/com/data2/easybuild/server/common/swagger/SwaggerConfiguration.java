@@ -26,12 +26,13 @@ import static com.data2.easybuild.server.common.consts.SwaggerConst.PREFIX;
  * @description
  * @date 2020/11/27 下午10:18
  */
-@Data
+
 @Slf4j
-@ConfigurationProperties(prefix = PREFIX)
 @Configuration
 @Profile({"dev", "test"})
 @EnableSwagger2
+@Data
+@ConfigurationProperties(prefix = PREFIX)
 @ConditionalOnProperty(havingValue = "true", prefix = PREFIX, name = "enable")
 public class SwaggerConfiguration implements WebMvcConfigurer, InitializingBean {
 
@@ -42,13 +43,13 @@ public class SwaggerConfiguration implements WebMvcConfigurer, InitializingBean 
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if (!Objects.isNull(configuration) && Arrays.asList(DEV,TEST).contains(configuration.getProfileActive().toLowerCase())) {
+        if (!Objects.isNull(configuration) && Arrays.asList(DEV, TEST).contains(configuration.getProfileActive().toLowerCase())) {
             registry.addResourceHandler("swagger-ui.html")
                     .addResourceLocations("classpath:/META-INF/resources/");
 
             registry.addResourceHandler("/webjars/**")
                     .addResourceLocations("classpath:/META-INF/resources/webjars/");
-        }else{
+        } else {
             log.info("not dev or test, not suggest show swagger");
         }
     }

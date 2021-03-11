@@ -11,18 +11,4 @@ public enum  DupEnum {
 
     FRONT_ID, REQUEST_HASH;
 
-//    FRONT_ID("前端","FrontID"),
-//    REQUEST_HASH("请求体哈希","RequestHash");
-//
-//    private String code;
-//    private String val;
-//
-//    DupEnum(String code, String val){
-//        this.code = code;
-//        this.val = val;
-//    }
-//
-//    public String getVal() {
-//        return val;
-//    }
 }

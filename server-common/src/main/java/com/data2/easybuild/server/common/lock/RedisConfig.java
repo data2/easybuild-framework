@@ -1,12 +1,15 @@
 package com.data2.easybuild.server.common.lock;
 
 import com.data2.easybuild.api.common.utils.ParamUtil;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisPool;
 
 /**
@@ -16,6 +19,7 @@ import redis.clients.jedis.JedisPool;
  */
 @Slf4j
 @Configuration
+@Data
 @ConfigurationProperties(prefix = "easy.redis")
 public class RedisConfig {
 

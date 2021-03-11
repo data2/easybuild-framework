@@ -1,12 +1,14 @@
 package com.data2.easybuild.server.common.lock;
 
 import com.google.common.collect.Lists;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.params.SetParams;
@@ -17,9 +19,10 @@ import redis.clients.jedis.params.SetParams;
  * @date 2020/11/27 下午10:10
  */
 @Slf4j
-@Configuration
-@ConditionalOnBean(JedisPool.class)
+@Component
+@Data
 @ConfigurationProperties(prefix = "easy.lock")
+@ConditionalOnBean(JedisPool.class)
 @ConditionalOnProperty(name = "open", prefix = "easy.lock", havingValue = "true")
 public class SingleRedisDistributeLock {
 

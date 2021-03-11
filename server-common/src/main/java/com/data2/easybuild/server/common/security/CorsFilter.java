@@ -1,7 +1,10 @@
 package com.data2.easybuild.server.common.security;
 
+import lombok.Data;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +20,9 @@ import java.util.List;
  * all interface enable cors , use this
  * if u want some interface, can use springboot anno @CrossOrigin
  */
-@Configuration
+@Component
+@Data
+@ConfigurationProperties(prefix = "easy.cors")
 @ConditionalOnProperty(prefix = "easy.cors", name = "enable", havingValue = "true")
 public class CorsFilter implements Filter {
 

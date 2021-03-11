@@ -21,9 +21,8 @@ import javax.annotation.PostConstruct;
  * @date 2021/1/28 上午11:25
  */
 @Component
-@Configuration
-@ConfigurationProperties(prefix = "easy.http")
 @Data
+@ConfigurationProperties(prefix = "easy.http")
 public class EasyRestTemplate extends RestTemplate {
 
     private Integer connectionRequestTimeout;
