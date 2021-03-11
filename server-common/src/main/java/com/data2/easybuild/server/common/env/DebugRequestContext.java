@@ -58,7 +58,7 @@ public class DebugRequestContext extends RequestContext implements InitializingB
             Set keySet = ((Map) source).keySet();
             if ((keySet.contains("easy.lock.open") && ((Map) source).get("easy.lock.open").toString().equals("true"))
                     || (keySet.contains("easy.dup.open") && ((Map) source).get("easy.dup.open").toString().equals("true"))) {
-                if (StringUtils.isEmpty(((Map) source).get("easy.redis.host").toString())) {
+                if (StringUtils.isEmpty(((Map) source).get("easy.redis.host").toString()) || StringUtils.isEmpty(((Map) source).get("easy.redis.port").toString())) {
                     throw new EasyBusinessException("请先配置redis");
                 }
             }
