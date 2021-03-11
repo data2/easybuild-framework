@@ -4,9 +4,6 @@ import com.data2.easybuild.api.common.utils.ParamUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,15 +28,15 @@ public class RedisConfig {
     @Bean
     public GenericObjectPoolConfig config() {
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
-        config.setMaxIdle(ParamUtil.isNull(maxIdle,1000));
-        config.setMaxTotal(ParamUtil.isNull(maxTotal,1000));
-        config.setMinIdle(ParamUtil.isNull(minIdle,1000));
+        config.setMaxIdle(ParamUtil.isNull(maxIdle, 1000));
+        config.setMaxTotal(ParamUtil.isNull(maxTotal, 1000));
+        config.setMinIdle(ParamUtil.isNull(minIdle, 1000));
         return config;
     }
 
     @Bean
     public JedisPool jedisPool() {
-        if (StringUtils.isEmpty(host) || port == null){
+        if (StringUtils.isEmpty(host) || port == null) {
             log.info("redis host or port is not config, if u use jedispool will throw nullpointexception!");
             return null;
         }
