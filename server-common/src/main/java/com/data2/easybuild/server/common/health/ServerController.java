@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ServerController {
     @GetMapping("/health")
     public String check(){
+        System.out.println("ok");
         return "ok";
     }
 }

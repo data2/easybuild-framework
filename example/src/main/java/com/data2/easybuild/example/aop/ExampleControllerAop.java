@@ -25,7 +25,7 @@ public class ExampleControllerAop extends AbstractRestAop {
 
     @Around(value = "apiPointCut()")
     @Override
-    public void doRestApi(ProceedingJoinPoint proceedingJoinPoint) {
-        super.doRestApi(proceedingJoinPoint);
+    public Object doRestApi(ProceedingJoinPoint proceedingJoinPoint) {
+        return super.doRestApi(proceedingJoinPoint);
     }
 }

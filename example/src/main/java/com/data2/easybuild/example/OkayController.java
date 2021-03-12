@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020/12/24 下午4:32
  */
 @RestController
-@RequestMapping("/path")
-public class TestController {
+public class OkayController {
 
-    @DisableDuplicateSubmit(type = DupEnum.REQUEST_HASH, timeout = 2000)
+//    @DisableDuplicateSubmit(type = DupEnum.REQUEST_HASH, timeout = 2000)
     @GetMapping("/test")
     public String test(){
+        System.out.println("comein ");
         return "test okay.";
     }
 }

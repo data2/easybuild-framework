@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public abstract class AbstractRestAop extends AbstractOpenApiAop {
 
-    public void doRestApi(ProceedingJoinPoint proceedingJoinPoint){
+    public Object doRestApi(ProceedingJoinPoint proceedingJoinPoint){
         Object[] args = proceedingJoinPoint.getArgs();
         if (!Objects.isNull(args) && args.length > 0){
             for(Object arg : args){
@@ -22,7 +22,7 @@ public abstract class AbstractRestAop extends AbstractOpenApiAop {
                 }
             }
         }
-        super.doApi(proceedingJoinPoint);
+        return super.doApi(proceedingJoinPoint);
     }
 
     // 预留功能

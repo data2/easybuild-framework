@@ -35,7 +35,7 @@ easy:
     default-max-per-route: 200
   cors:
     enable: true
-    allowOrigin: www.test1.com,www.test2.com,localhost
+    allowOrigin: www.test1.com,www.test2.com,local.cecloud.com:8080,chrome-extension://coohjcphdfgbiolnekdpbcijmhambjff
 
 
 

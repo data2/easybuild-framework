@@ -3,14 +3,12 @@ package com.data2.easybuild.server.common.security;
 import lombok.Data;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author data2
@@ -29,9 +27,13 @@ public class CorsFilter implements Filter {
     private String allowOrigin;
 
     @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse res = (HttpServletResponse) response;
-        if (allowOrigin.contains(((HttpServletRequest) request).getHeader("Origin"))) {
+        if (allowOrigin.contains(((HttpServletRequest) request).getHeader("host"))) {
             res.addHeader("Access-Control-Allow-Credentials", "true");
             res.addHeader("Access-Control-Allow-Origin", "*");
             res.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
@@ -42,5 +44,9 @@ public class CorsFilter implements Filter {
             }
         }
         chain.doFilter(request, response);
+    }
+
+    @Override
+    public void destroy() {
     }
 }

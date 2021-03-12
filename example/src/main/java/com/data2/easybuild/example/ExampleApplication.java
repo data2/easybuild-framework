@@ -18,16 +18,10 @@ public class ExampleApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ExampleApplication.class, args);
-//        EasyRestTemplate rest = context.getBean(EasyRestTemplate.class);
-//        RequestConfig requestConfigRequestConfig = context.getBean(RequestConfig.class);
-//        PoolingHttpClientConnectionManager pool = context.getBean(PoolingHttpClientConnectionManager.class);
-//        SingleRedisDistributeLock lock = context.getBean(SingleRedisDistributeLock.class);
-//        System.out.println(rest.getConnectionRequestTimeout());
+        OkayController rest = context.getBean(OkayController.class);
+        System.out.println(rest.test());
     }
 
-    @GetMapping("/hi")
-    public String hi() {
-        return "easybuild-framework";
-    }
+
 
 }

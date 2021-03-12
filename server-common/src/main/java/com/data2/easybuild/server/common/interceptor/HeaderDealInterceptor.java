@@ -2,6 +2,7 @@ package com.data2.easybuild.server.common.interceptor;
 
 import com.data2.easybuild.server.common.env.RequestContext;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,12 @@ public class HeaderDealInterceptor implements HandlerInterceptor {
             param.put(key,request.getHeader(key));
         }
         RequestContext.addHeaders(param);
-        return false;
+        return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
+
     }
 
     @Override
