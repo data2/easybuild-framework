@@ -40,12 +40,47 @@ java框架
     easy.lock.open: true
     
 # redis配置 
+    easy:
+        redis:
+            host: localhost
+            port: 6379
+            maxTotal:
+            maxIdle:
+            minIdle:
 
 # http线程池配置
- restTemplate
+ 
+    使用restTemplate 
+    
+    easy:
+      http:
+        connect-timeout: 30000
+        connection-request-timeout: 30000
+        socket-timeout: 60000
+        max-total: 200
+        default-max-per-route: 200
+ 
  
 # 跨域请求， 指定开放哪些域名可以访问
-
+    
+    easy:
+        cors:
+            open: true
+            allowOrigin: www.test1.com,www.test2.com
+           
+# 是否开启swagger
+    
+    easy:
+        swagger:
+            enable: true
+            profile: test
+ 
+ # 打印应用详细环境参数
+    easy:
+        context:
+            debug: true
+            pretty: true
+ 
 
     
     
