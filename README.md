@@ -31,4 +31,21 @@ java框架
     然后针对ip+frontId 或者 ip+hash进行redis排重
 
     后端设计到请求级别，controller增加注解 @DisableDuplicateSubmit
+    
+    easy.dup.open: true
 
+
+# 是否开启分布式锁
+
+    easy.lock.open: true
+    
+# redis配置 
+
+# http线程池配置
+ restTemplate
+ 
+# 跨域请求， 指定开放哪些域名可以访问
+
+
+    
+    
