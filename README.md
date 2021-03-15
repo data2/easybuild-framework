@@ -24,12 +24,12 @@ java框架
 
 两种方式
 
-请求体中frontId前端设值，每次请求传递不同的值，后端依据排重
+    请求体中frontId前端设值，每次请求传递不同的值，后端依据排重
 或者请求头中设置frontId
 
-或者请求体传值hash
+    或者请求体传值hash
 
-然后针对ip+frontId 或者 ip+hash进行redis排重
+    然后针对ip+frontId 或者 ip+hash进行redis排重
 
-后端设计到请求级别，controller增加注解 @DisableDuplicateSubmit
+    后端设计到请求级别，controller增加注解 @DisableDuplicateSubmit
 
