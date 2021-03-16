@@ -40,10 +40,12 @@ public class CorsFilter implements Filter {
             res.addHeader("Access-Control-Allow-Headers", "Content-Type,X-CAF-Authorization-Token,sessionToken,X-TOKEN");
             if (((HttpServletRequest) request).getMethod() == "OPTIONS") {
                 res.getOutputStream().print("ok");
-                return;
+            } else {
+                chain.doFilter(request, response);
             }
+        } else {
+            res.getOutputStream().print("cors request, forbidden");
         }
-        chain.doFilter(request, response);
     }
 
     @Override

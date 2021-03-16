@@ -9,13 +9,18 @@ import java.util.HashMap;
  */
 
 public class RequestContext {
-    private static ThreadLocal<HashMap<String,String>> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<HashMap<String, String>> threadLocal = new ThreadLocal<>();
+
     public static void addHeaders(HashMap<String, String> param) {
         threadLocal.set(param);
     }
 
-
     public static void rmHeaders() {
         threadLocal.remove();
     }
+
+    public static String getHeader(String headerName) {
+        return threadLocal.get().get(headerName);
+    }
+
 }

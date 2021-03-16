@@ -12,11 +12,13 @@ import com.data2.easybuild.api.common.exception.EasyBusinessException;
 import com.data2.easybuild.api.common.rest.dto.AbstractRestRequest;
 import com.data2.easybuild.api.common.rest.dto.RestResponse;
 import com.data2.easybuild.server.common.anno.DisableDuplicateSubmit;
+import com.data2.easybuild.server.common.env.RequestContext;
 import com.data2.easybuild.server.common.env.ServerLog;
 import com.data2.easybuild.server.common.env.SpringContextHolder;
 import com.data2.easybuild.server.common.lock.RequestDupIntecept;
 import com.data2.easybuild.server.common.util.IpUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -82,7 +84,7 @@ public abstract class AbstractOpenApiAop {
             StringBuffer key = new StringBuffer(IpUtils.getIpAddr(((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()));
             switch (anno.type()) {
                 case FRONT_ID:
-                    key.append(request.getFrontID());
+                    key.append(StringUtils.isEmpty(RequestContext.getHeader("frontId")) ? request.getFrontID() : RequestContext.getHeader("frontId"));
                     break;
                 case REQUEST_HASH:
                     key.append(String.valueOf(request.toString().hashCode()));

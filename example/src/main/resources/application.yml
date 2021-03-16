@@ -3,6 +3,14 @@ spring:
     name: easybuild
   profiles:
     active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/panther_dev?useUnicode=true&characterEncoding=UTF-8
+    # Jasypt加密 可到common包中找到JasyptUtil加解密工具类生成加密结果 格式为ENC(加密结果)
+    # java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="dbpassword" password=encodepassword algorithm=PBEWithMD5AndDES
+    username: ENC(S2G86yhb0OMJMeNXUaGwYw==)
+    password: ENC(GfP4qfnrJeqMvzN1nOemIQ==)
+
 server:
   servlet:
     context-path: /easybuild
@@ -15,7 +23,7 @@ easy:
   context:
     debug: true
     pretty: false
-  dup: # 是否启用 防请求重复提交
+  dup: # 是否启用 防请求重复提交 支持两种方式
     open: true
   lock: # 是否注册分布式锁 SingleRedisDistributeLock
     open: true
@@ -35,9 +43,14 @@ easy:
     default-max-per-route: 200
   cors:
     enable: true
-    allowOrigin: www.test1.com,www.test2.com,local.cecloud.com:8080,chrome-extension://coohjcphdfgbiolnekdpbcijmhambjff
+    allowOrigin: localhost:8080,local.cecloud.com:8080,chrome-extension://coohjcphdfgbiolnekdpbcijmhambjff
+  security: #  请求参数加密 支持@RequestBody post方式 application/json
+    encrypt-request:
+      enable: true
 
-
+jasypt:
+  encryptor:
+    password: encodepassword # 加密秘钥
 
 
 

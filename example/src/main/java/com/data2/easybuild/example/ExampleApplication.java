@@ -2,6 +2,7 @@ package com.data2.easybuild.example;
 
 import com.data2.easybuild.server.common.http.EasyRestTemplate;
 import com.data2.easybuild.server.common.lock.SingleRedisDistributeLock;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.boot.SpringApplication;
@@ -14,12 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @ComponentScan({"com.data2.easybuild.example", "com.data2.easybuild"})
+@EnableEncryptableProperties
 public class ExampleApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ExampleApplication.class, args);
-        OkayController rest = context.getBean(OkayController.class);
-        System.out.println(rest.test());
     }
 
 
