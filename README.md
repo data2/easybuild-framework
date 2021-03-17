@@ -114,3 +114,7 @@ java框架
       enable: true
       
     前端传递参数公钥加密，后台私钥解密，私钥存储在resources/key/private_key.txt
+
+# 序列生成器
+    
+    采用雪花算法snowFlake，64bit
