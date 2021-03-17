@@ -18,9 +18,8 @@ public class OkayController {
 //    @DisableDuplicateSubmit(type = DupEnum.REQUEST_HASH, timeout = 2000)
     @PostMapping("/test")
 //    @EncryptRequest
-    public void test(@RequestBody TestReq testReq){
+    public Object test(@RequestBody TestReq testReq){
         System.out.println("comein ");
         throw new EasyBusinessException("837942");
-
     }
 }

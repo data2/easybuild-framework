@@ -61,14 +61,14 @@ public abstract class AbstractOpenApiAop {
             disableDup(proceedingJoinPoint, request);
             Object response = proceedingJoinPoint.proceed();
             okLog(start, request, response);
-            return response;
+            return RestResponse.ok(response);
         } catch (Throwable throwable) {
             EasyBusinessException exception = tranformException(throwable);
             failLog(start, request, exception);
             if (request instanceof AbstractRestRequest) {
                 return RestResponse.fail("1", exception.getMessage());
             }
-            return null;
+            return RestResponse.fail("9999", "系统异常");
         } finally {
         }
     }
