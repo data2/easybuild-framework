@@ -8,6 +8,7 @@ java框架
     入参统一校验
     解决-请求重复提交
     记录日志
+    统计接口耗时
     统一异常处理
     统一出参格式
 
@@ -92,5 +93,17 @@ java框架
             pretty: true
  
 
-    
+ # 登陆拦截
+    全局的登陆验证，开启open, 自定义login实现逻辑，实现LoginService接口，声明成组件即可
+    easy:
+         login:
+            open: true
+            path-patterns:
+              - /**
+            exclude-path-patterns:
+              - /**/*.html
+              - /**/*.js
+              - /**/*.css
+              - /**/*.woff
+              - /**/*.ttf
     
