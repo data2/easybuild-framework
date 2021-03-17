@@ -47,6 +47,17 @@ easy:
   security: #  请求参数加密 支持@RequestBody post方式 application/json
     encrypt-request:
       enable: true
+  login:
+    open: true
+    path-patterns:
+      - /**
+    exclude-path-patterns:
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.woff
+      - /**/*.ttf
+
 
 jasypt:
   encryptor:

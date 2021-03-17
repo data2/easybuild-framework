@@ -1,6 +1,15 @@
 # easybuild-framework
 java框架
 
+# Aop
+
+通过切面Aspect 对所有的controller中的方法进行拦截 
+
+    入参统一校验
+    解决-请求重复提交
+    记录日志
+    统一异常处理
+
 # 配置文件加密jasypt
     1Application.java上增加注解@EnableEncryptableProperties；
 

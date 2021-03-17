@@ -87,7 +87,7 @@ public class RsaUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(encr);
+        System.out.println();
     }
 
 

@@ -1,5 +1,6 @@
 package com.data2.easybuild.example;
 
+import com.data2.easybuild.api.common.exception.EasyBusinessException;
 import com.data2.easybuild.example.bean.TestReq;
 import com.data2.easybuild.server.common.anno.DisableDuplicateSubmit;
 import com.data2.easybuild.server.common.dup.DupEnum;
@@ -17,8 +18,9 @@ public class OkayController {
 //    @DisableDuplicateSubmit(type = DupEnum.REQUEST_HASH, timeout = 2000)
     @PostMapping("/test")
 //    @EncryptRequest
-    public String test(@RequestBody TestReq testReq){
+    public void test(@RequestBody TestReq testReq){
         System.out.println("comein ");
-        return "test okay.";
+        throw new EasyBusinessException("837942");
+
     }
 }
