@@ -106,4 +106,11 @@ java框架
               - /**/*.css
               - /**/*.woff
               - /**/*.ttf
+   
+ # 请求参数加密 
+    支持@RequestBody post方式 application/json
     
+    encrypt-request:
+      enable: true
+      
+    前端传递参数公钥加密，后台私钥解密，私钥存储在resources/key/private_key.txt
