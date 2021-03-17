@@ -9,6 +9,7 @@ java框架
     解决-请求重复提交
     记录日志
     统一异常处理
+    统一出参格式
 
 # 配置文件加密jasypt
     1Application.java上增加注解@EnableEncryptableProperties；
