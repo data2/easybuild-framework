@@ -57,6 +57,10 @@ easy:
       - /**/*.css
       - /**/*.woff
       - /**/*.ttf
+  seq:
+    workerId: 1
+    datacenterId: 1
+
 
 
 jasypt:
