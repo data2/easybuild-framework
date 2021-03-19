@@ -2,7 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.data2.easybuild</groupId>
+
+    <parent>
+        <artifactId>easybuild-framework</artifactId>
+        <groupId>com.data2.easybuild</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
     <artifactId>example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>example</name>
@@ -15,21 +21,14 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.1.5.RELEASE</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.data2.easybuild</groupId>
             <artifactId>server-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.13</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
