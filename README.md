@@ -118,3 +118,10 @@ java框架
 # 序列生成器
     
     采用雪花算法snowFlake，64bit
+    
+    配置完毕自动开启
+    easy:
+        seq:
+            datacenterId: 1
+            workerId : 1
+            
