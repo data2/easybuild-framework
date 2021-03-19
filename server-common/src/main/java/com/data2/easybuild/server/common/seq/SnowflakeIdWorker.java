@@ -1,9 +1,22 @@
 package com.data2.easybuild.server.common.seq;
 
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConstructorBinding;
+import org.springframework.context.annotation.Configuration;
+
+import static com.data2.easybuild.server.common.seq.SnowflakeIdWorker.PREFIX;
+
+
 /**
  * @author data2
  */
+@ConstructorBinding
+@ConfigurationProperties(prefix = PREFIX)
 public class SnowflakeIdWorker {
+
+    public final static String PREFIX = "easy.seq";
+
     // ==============================Fields==================
     /**
      * 开始时间截 (2019-08-06)
@@ -74,6 +87,7 @@ public class SnowflakeIdWorker {
      * 上次生成ID的时间截
      */
     private long lastTimestamp = -1L;
+
 
     //==============================Constructors====================
 

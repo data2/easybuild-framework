@@ -52,15 +52,19 @@ easy:
     path-patterns:
       - /**
     exclude-path-patterns:
-      - /**/*.html
-      - /**/*.js
-      - /**/*.css
-      - /**/*.woff
-      - /**/*.ttf
-  seq:
-    workerId: 1
-    datacenterId: 1
+      - /*/*.html
+      - /*/*.js
+      - /*/*.css
+      - /*/*.woff
+      - /*/*.ttf
+    seq:
+      workerId: 1
+      datacenterId: 1
 
+minbox:
+  config:
+    author: 恒宇少年 - 于起宇
+    blog-address: http://blog.yuqiyu.com
 
 
 jasypt:

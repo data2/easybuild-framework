@@ -5,7 +5,11 @@ import com.data2.easybuild.example.bean.TestReq;
 import com.data2.easybuild.server.common.anno.DisableDuplicateSubmit;
 import com.data2.easybuild.server.common.dup.DupEnum;
 import com.data2.easybuild.server.common.security.EncryptRequest;
+import com.data2.easybuild.server.common.seq.SnowflakeIdWorker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+
 
 /**
  * @author data2
@@ -15,11 +19,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class OkayController {
 
+    @Autowired(required = false)
+    private SnowflakeIdWorker snowflakeIdWorker;
+
 //    @DisableDuplicateSubmit(type = DupEnum.REQUEST_HASH, timeout = 2000)
-    @PostMapping("/test")
+    @GetMapping("/test")
 //    @EncryptRequest
-    public Object test(@RequestBody TestReq testReq){
+    public Object test(){
         System.out.println("comein ");
-        throw new EasyBusinessException("837942");
+        System.out.println(snowflakeIdWorker.nextId());
+        return snowflakeIdWorker.nextId();
+        //throw new EasyBusinessException("837942");
     }
 }

@@ -2,11 +2,13 @@ package com.data2.easybuild.example;
 
 import com.data2.easybuild.server.common.http.EasyRestTemplate;
 import com.data2.easybuild.server.common.lock.SingleRedisDistributeLock;
+import com.data2.easybuild.server.common.seq.SnowflakeIdWorker;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
