@@ -1,17 +1,12 @@
 package com.data2.easybuild.example;
 
-import com.data2.easybuild.server.common.http.EasyRestTemplate;
-import com.data2.easybuild.server.common.lock.SingleRedisDistributeLock;
-import com.data2.easybuild.server.common.seq.SnowflakeIdWorker;
+import com.data2.easybuild.redis.common.RedissonConfig;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.redisson.api.RedissonClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -22,8 +17,13 @@ public class ExampleApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ExampleApplication.class, args);
-    }
 
+        RedissonConfig t1 = context.getBean(RedissonConfig.class);
+        System.out.println(t1);
+
+        RedissonClient t = context.getBean(RedissonClient.class);
+        System.out.println(t);
+    }
 
 
 }
