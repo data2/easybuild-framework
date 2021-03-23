@@ -17,9 +17,6 @@
         <module>configuration-common</module>
         <module>redis-common</module>
         <module>rocketmq-common</module>
-        <module>mq-common</module>
-        <module>rocketmq-common</module>
-        <module>kafka-common</module>
         <module>kafka-common</module>
         <module>utils-common</module>
     </modules>
@@ -40,6 +37,8 @@
         <dubbo.version>2.7.7</dubbo.version>
         <redisson.version>3.10.1</redisson.version>
         <jedis.version>3.0.1</jedis.version>
+        <redisson-spring-data-24.version>3.15.1</redisson-spring-data-24.version>
+        <rocketmq-client.version>4.3.0</rocketmq-client.version>
     </properties>
 
     <dependencyManagement>
@@ -58,6 +57,25 @@
                 <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
                 <version>${spring-cloud-starter-netflix-hystrix.version}</version>
                 <optional>true</optional>
+            </dependency>
+
+            <!--  redisson-spring-data-24 对应	2.4.x -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-data-24</artifactId>
+                <version>${redisson-spring-data-24.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq-client.version}</version>
             </dependency>
 
             <!-- javax -->
