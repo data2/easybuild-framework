@@ -1,14 +1,17 @@
 package com.data2.easybuild.server.common.lock;
 
-import com.google.common.collect.Lists;
-import lombok.Data;
+import com.data2.easybuild.api.common.exception.EasyBusinessException;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBucket;
+import org.redisson.api.RTransaction;
+import org.redisson.api.RedissonClient;
+import org.redisson.api.TransactionOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author data2
@@ -17,35 +20,28 @@ import redis.clients.jedis.JedisPool;
  */
 @Slf4j
 @Component
-@ConditionalOnBean(JedisPool.class)
+@ConditionalOnBean(RedissonClient.class)
 @ConditionalOnProperty(prefix = "easy.dup", name = "open", havingValue = "true")
 public class RequestDupIntecept {
     @Autowired
-    private JedisPool jedisPool;
+    private RedissonClient redissonClient;
 
-    public boolean intercept(String key, String expireTimeSecond) {
-        Jedis jedis = null;
+    public void intercept(String key, String expireTimeSecond) {
+        RTransaction trans = null;
         try {
-            jedis = jedisPool.getResource();
-            String script =
-                    "if redis.call('incr',KEYS[1]) >= 2 then" +
-                            "    return 1 " +
-                            "else" +
-                            "    redis.call('expire',KEYS[1], ARGV[1])" +
-                            "    return 0 " +
-                            "end";
-
-            Object result = jedis.eval(script, Lists.newArrayList(key), Lists.newArrayList(expireTimeSecond));
-            if ("1".equals(result.toString())) {
-                return true;
+            trans = redissonClient.createTransaction(TransactionOptions.defaults());
+            RBucket<Integer> bucket = trans.getBucket(key);
+            if (bucket.isExists()) {
+                throw new EasyBusinessException("重复请求");
             }
+            bucket.set(1, Long.parseLong(expireTimeSecond), TimeUnit.SECONDS);
+            trans.commit();
         } catch (Exception e) {
-        } finally {
-            if (jedis != null) {
-                jedis.close();
+            if (!(e instanceof EasyBusinessException)) {
+                trans.rollback();
             }
+        } finally {
         }
-        return false;
     }
 
 }

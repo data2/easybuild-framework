@@ -90,9 +90,7 @@ public abstract class AbstractOpenApiAop {
                     key.append(String.valueOf(request.toString().hashCode()));
                     break;
             }
-            if (SpringContextHolder.getBean(RequestDupIntecept.class).intercept(key.toString(), String.valueOf(anno.timeout()))) {
-                throw new EasyBusinessException("重复提交");
-            }
+            SpringContextHolder.getBean(RequestDupIntecept.class).intercept(key.toString(), String.valueOf(anno.timeout()));
         }
 
     }
