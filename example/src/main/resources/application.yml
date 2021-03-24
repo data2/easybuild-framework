@@ -50,6 +50,16 @@ easy:
   seq:
     workerId: 1
     datacenterId: 1
+  rocketmq:
+    nameSrvAddr: localhost:9876
+    topic: default_topic
+    producer:
+      group: ProducerGroup
+    consumer:
+      group: ConsumerGroup
+
+
+
   redis:
     redisson:
       file: classpath:redisson.yaml

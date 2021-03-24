@@ -16,9 +16,8 @@
         <module>example</module>
         <module>configuration-common</module>
         <module>redis-common</module>
-        <module>rocketmq-common</module>
-        <module>kafka-common</module>
         <module>utils-common</module>
+        <module>mq-common</module>
     </modules>
 
 
