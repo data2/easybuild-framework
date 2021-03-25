@@ -1,4 +1,4 @@
-package com.data2.easybuild.mq.common.rocketmq;
+package com.data2.easybuild.message.queue.common.rocketmq;
 
 import com.data2.easybuild.api.common.exception.EasyBusinessException;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,6 @@ import org.apache.rocketmq.client.consumer.listener.MessageListener;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;

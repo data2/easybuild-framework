@@ -1,4 +1,4 @@
-package com.data2.easybuild.mq.common.rocketmq;
+package com.data2.easybuild.message.queue.common.rocketmq;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

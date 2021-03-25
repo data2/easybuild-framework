@@ -1,9 +1,8 @@
-package com.data2.easybuild.mq.common.rocketmq;
+package com.data2.easybuild.message.queue.common.rocketmq;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.MQPushConsumer;
-import org.apache.rocketmq.client.exception.MQClientException;
 
 import java.util.Objects;
 

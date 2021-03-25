@@ -17,7 +17,8 @@
         <module>configuration-common</module>
         <module>redis-common</module>
         <module>utils-common</module>
-        <module>mq-common</module>
+        <module>message-queue-common</module>
+        <module>config-center-common</module>
     </modules>
 
 
