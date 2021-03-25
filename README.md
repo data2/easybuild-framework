@@ -132,6 +132,8 @@ java框架
     easy:
         rocketmq:
              producer:
+               transaction:
+                 enable: true
                nameSrvAddr: localhost:9876
                group: ProducerGroup
                topic: default_topic
@@ -172,6 +174,14 @@ java框架
              return null;
          }
      }
+     
+     开启事务，注入TransactionMQProducer，否则注入
+     
+     @Autowired
+     private TransactionMQProducer transactionMQProducer;
+     
+     @Autowired
+     private DefaultMQProducer defaultMQProducer;
      
      
      ``` 
