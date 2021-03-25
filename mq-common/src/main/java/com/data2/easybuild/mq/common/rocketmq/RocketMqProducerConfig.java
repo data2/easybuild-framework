@@ -1,6 +1,7 @@
 package com.data2.easybuild.mq.common.rocketmq;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**

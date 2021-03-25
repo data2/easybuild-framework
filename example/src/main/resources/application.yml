@@ -52,6 +52,8 @@ easy:
     datacenterId: 1
   rocketmq:
     producer:
+      transaction:
+        enable: true
       nameSrvAddr: localhost:9876
       group: ProducerGroup
       topic: default_topic
