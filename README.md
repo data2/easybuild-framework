@@ -129,6 +129,7 @@ java框架
     
     pull push 消费两种方式
     
+    ```
     easy:
         rocketmq:
              producer:
@@ -143,7 +144,7 @@ java框架
                group: ConsumerGroup
                topic: default_topic
                tag: '*'   
-     
+     ```
      
   ```
      pull, 继承PullConsumerJob即可，run中进行消费

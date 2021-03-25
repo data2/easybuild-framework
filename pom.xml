@@ -38,6 +38,7 @@
         <jedis.version>3.0.1</jedis.version>
         <redisson-spring-data-24.version>3.15.1</redisson-spring-data-24.version>
         <rocketmq-client.version>4.3.0</rocketmq-client.version>
+        <spring-expression.version>5.3.5</spring-expression.version>
     </properties>
 
     <dependencyManagement>
@@ -137,6 +138,12 @@
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
                 <version>${jedis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring-expression.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
