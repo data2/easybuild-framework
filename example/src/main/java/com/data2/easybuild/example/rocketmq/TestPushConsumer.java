@@ -1,10 +1,7 @@
 package com.data2.easybuild.example.rocketmq;
 
-import com.data2.easybuild.mq.common.rocketmq.Consumer;
-import com.data2.easybuild.mq.common.rocketmq.PushConsumerJob;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import org.apache.rocketmq.client.exception.MQClientException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.data2.easybuild.message.queue.common.rocketmq.Consumer;
+import com.data2.easybuild.message.queue.common.rocketmq.PushConsumerJob;
 import org.springframework.stereotype.Component;
 
 /**

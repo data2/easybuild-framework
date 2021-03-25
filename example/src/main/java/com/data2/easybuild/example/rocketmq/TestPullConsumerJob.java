@@ -1,7 +1,7 @@
 package com.data2.easybuild.example.rocketmq;
 
-import com.data2.easybuild.mq.common.rocketmq.Consumer;
-import com.data2.easybuild.mq.common.rocketmq.PullConsumerJob;
+import com.data2.easybuild.message.queue.common.rocketmq.Consumer;
+import com.data2.easybuild.message.queue.common.rocketmq.PullConsumerJob;
 import org.springframework.stereotype.Component;
 
 /**

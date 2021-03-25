@@ -1,9 +1,7 @@
 package com.data2.easybuild.example;
 
-import com.data2.easybuild.mq.common.rocketmq.RocketMqProducerConfig;
-import com.data2.easybuild.redis.common.RedissonConfig;
+import com.data2.easybuild.message.queue.common.rocketmq.RocketMqProducerConfig;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import org.redisson.api.RedissonClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

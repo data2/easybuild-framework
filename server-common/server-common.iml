@@ -114,7 +114,7 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.3" level="project" />
     <orderEntry type="library" name="Maven: org.jodd:jodd-bean:3.7.1" level="project" />
     <orderEntry type="library" name="Maven: org.jodd:jodd-core:3.7.1" level="project" />
-    <orderEntry type="module" module-name="mq-common" />
+    <orderEntry type="module" module-name="message-queue-common" />
     <orderEntry type="library" name="Maven: org.apache.rocketmq:rocketmq-client:4.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.rocketmq:rocketmq-common:4.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.rocketmq:rocketmq-remoting:4.3.0" level="project" />
