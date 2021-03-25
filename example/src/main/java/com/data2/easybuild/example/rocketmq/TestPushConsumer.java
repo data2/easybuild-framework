@@ -13,6 +13,6 @@ import org.springframework.stereotype.Component;
  * @date 2021/3/24 下午3:49
  */
 @Component
-@Consumer(consumerGroup = "test_consumer_group", topic = "test_topic", namesrvAddr = "", listener = TestMessageListener.class)
-public class TestRocketMQConsumer extends PushConsumerJob {
+@Consumer(consumerGroup = "test_consumer_group", topic = "test_topic", namesrvAddr = "", listener = TestPushMessageListener.class)
+public class TestPushConsumer extends PushConsumerJob {
 }

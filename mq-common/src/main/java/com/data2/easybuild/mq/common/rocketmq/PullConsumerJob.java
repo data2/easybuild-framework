@@ -23,4 +23,5 @@ public abstract class PullConsumerJob implements MqConsumer {
             log.info("PullConsumerJob shutdown!");
         }
     }
+
 }

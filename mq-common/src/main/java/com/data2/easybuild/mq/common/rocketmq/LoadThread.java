@@ -9,6 +9,7 @@ import org.apache.rocketmq.client.consumer.listener.MessageListener;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
@@ -52,12 +53,6 @@ public class LoadThread implements BeanPostProcessor, ApplicationContextAware {
                 ((PullConsumerJob) bean).setConsumer(new DefaultMQPullConsumer(annotation.consumerGroup()));
                 DefaultMQPullConsumer consumer = (DefaultMQPullConsumer) ((PullConsumerJob) bean).getConsumer();
                 consumer.setNamesrvAddr(annotation.namesrvAddr());
-                try {
-                    consumer.fetchSubscribeMessageQueues(annotation.topic());
-                } catch (MQClientException e) {
-                    e.printStackTrace();
-                    throw new EasyBusinessException("PullConsumerJob subscribe exception occur");
-                }
             }
             if (bean instanceof PushConsumerJob) {
                 ((PushConsumerJob) bean).setConsumer(new DefaultMQPushConsumer(annotation.consumerGroup()));

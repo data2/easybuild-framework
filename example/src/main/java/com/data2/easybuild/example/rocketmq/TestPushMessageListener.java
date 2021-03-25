@@ -14,9 +14,10 @@ import java.util.List;
  * @date 2021/3/24 下午4:20
  */
 @Component
-public class TestMessageListener implements MessageListenerConcurrently {
+public class TestPushMessageListener implements MessageListenerConcurrently {
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
+        // DO you business
         return null;
     }
 }

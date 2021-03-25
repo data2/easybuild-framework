@@ -25,5 +25,7 @@ public abstract class PushConsumerJob implements MqConsumer {
         }
     }
 
-
+    @Override
+    public void run() {
+    }
 }

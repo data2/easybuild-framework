@@ -1,5 +1,6 @@
 package com.data2.easybuild.mq.common.rocketmq;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.context.annotation.Scope;
 
 import java.lang.annotation.*;
@@ -19,5 +20,5 @@ public @interface Consumer {
     String topic();
     String tag() default "*" ;
     String namesrvAddr();
-    Class listener();
+    Class listener() default ObjectUtils.Null.class;
 }
