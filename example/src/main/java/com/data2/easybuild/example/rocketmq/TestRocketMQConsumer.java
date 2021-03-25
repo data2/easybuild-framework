@@ -13,20 +13,6 @@ import org.springframework.stereotype.Component;
  * @date 2021/3/24 下午3:49
  */
 @Component
-@Consumer(consumerGroup = "test_consumer_group", topic = "test_topic", namesrvAddr = "")
+@Consumer(consumerGroup = "test_consumer_group", topic = "test_topic", namesrvAddr = "", listener = TestMessageListener.class)
 public class TestRocketMQConsumer extends PushConsumerJob {
-
-    @Autowired
-    private TestMessageListener testMessageListener;
-
-    @Override
-    public void run() {
-        try {
-            consumer.registerMessageListener(testMessageListener);
-            consumer.start();
-        } catch (MQClientException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
