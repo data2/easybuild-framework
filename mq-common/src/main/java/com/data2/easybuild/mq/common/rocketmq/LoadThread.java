@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author data2
@@ -84,6 +85,7 @@ public class LoadThread implements BeanPostProcessor, ApplicationContextAware {
             if (bean instanceof PullConsumerJob) {
                 try {
                     ((PullConsumerJob) bean).getConsumer().start();
+                    ((ThreadPoolExecutor)applicationContext.getBean("threadPool")).execute((Runnable) bean);
                 } catch (MQClientException e) {
                     e.printStackTrace();
                 }
