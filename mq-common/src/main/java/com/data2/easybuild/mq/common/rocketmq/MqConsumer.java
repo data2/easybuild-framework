@@ -9,6 +9,6 @@ import java.util.Objects;
  * @description
  * @date 2021/3/24 下午3:26
  */
-public interface MqConsumer extends DisposableBean, Runnable {
+public interface MqConsumer extends DisposableBean {
 
 }

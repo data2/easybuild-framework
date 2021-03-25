@@ -1,6 +1,7 @@
 package com.data2.easybuild.mq.common.rocketmq;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.MQPullConsumer;
 
 import java.util.Objects;
@@ -11,6 +12,7 @@ import java.util.Objects;
  * @date 2021/3/24 下午3:28
  */
 @Data
+@Slf4j
 public abstract class PullConsumerJob implements MqConsumer {
     protected MQPullConsumer consumer;
 
@@ -18,6 +20,7 @@ public abstract class PullConsumerJob implements MqConsumer {
     public void destroy() {
         if (Objects.nonNull(consumer)) {
             consumer.shutdown();
+            log.info("PullConsumerJob shutdown!");
         }
     }
 }
