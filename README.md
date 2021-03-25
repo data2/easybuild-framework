@@ -125,3 +125,53 @@ java框架
             datacenterId: 1
             workerId : 1
             
+# 集成rocketmq 消息队列
+    
+    pull push 消费两种方式
+    
+    easy:
+        rocketmq:
+             producer:
+               nameSrvAddr: localhost:9876
+               group: ProducerGroup
+               topic: default_topic
+               tag: '*'
+             consumer:
+               nameSrvAddr: localhost:9876
+               group: ConsumerGroup
+               topic: default_topic
+               tag: '*'   
+     
+     
+     ```
+     pull, 继承PullConsumerJob即可，run中进行消费
+     
+     @Component
+     @Consumer(consumerGroup = "test_consumer_group", topic = "test_topic", namesrvAddr = "")
+     public class TestPullConsumerJob extends PullConsumerJob {
+     
+         @Override
+         public void run() {
+             // DO your business, with consumer
+             //consumer.fetchConsumeOffset();
+         }
+     }
+     
+     push，继承PushConsumerJob，创建处理监听器
+     
+     @Component
+     @Consumer(consumerGroup = "test_consumer_group", topic = "test_topic", namesrvAddr = "", listener = TestPushMessageListener.class)
+     public class TestPushConsumer extends PushConsumerJob {
+     }
+     
+     @Component
+     public class TestPushMessageListener implements MessageListenerConcurrently {
+         @Override
+         public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
+             // DO you business
+             return null;
+         }
+     }
+     
+     
+     ``` 
