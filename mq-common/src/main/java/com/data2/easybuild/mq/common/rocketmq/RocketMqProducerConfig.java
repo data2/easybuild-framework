@@ -2,7 +2,9 @@ package com.data2.easybuild.mq.common.rocketmq;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.annotation.Order;
 
 /**
  * @author data2
@@ -11,6 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @ConfigurationProperties(prefix = "easy.rocketmq.producer")
+@ConditionalOnExpression("!T(org.springframework.util.StringUtils).isEmpty('${easy.rocketmq.producer.nameSrvAddr:}')")
 public class RocketMqProducerConfig {
     public String nameSrvAddr;
     public String group;
