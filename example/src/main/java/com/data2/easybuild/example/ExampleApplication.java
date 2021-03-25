@@ -1,5 +1,6 @@
 package com.data2.easybuild.example;
 
+import com.data2.easybuild.mq.common.rocketmq.RocketMqProducerConfig;
 import com.data2.easybuild.redis.common.RedissonConfig;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.redisson.api.RedissonClient;
@@ -18,11 +19,7 @@ public class ExampleApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ExampleApplication.class, args);
 
-        RedissonConfig t1 = context.getBean(RedissonConfig.class);
-        System.out.println(t1);
-
-        RedissonClient t = context.getBean(RedissonClient.class);
-        System.out.println(t);
+        System.out.println(context.getBean(RocketMqProducerConfig.class).getNameSrvAddr());
     }
 
 

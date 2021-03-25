@@ -4,6 +4,7 @@ import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ public class EasyProducerConfiguration {
     public static final String SUBPREFIX = "easy.rocketmq.producer.transaction";
     @Autowired
     private RocketMqProducerConfig rocketMqProducerConfig;
+
     @Bean
     @ConditionalOnProperty(prefix = SUBPREFIX, name = "enable", havingValue = "false")
     public DefaultMQProducer defaultMQProducer() throws MQClientException {
@@ -35,4 +37,5 @@ public class EasyProducerConfiguration {
         transactionMQProducer.start();
         return transactionMQProducer;
     }
+
 }
