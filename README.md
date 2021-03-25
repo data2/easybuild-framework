@@ -145,7 +145,7 @@ java框架
                tag: '*'   
      
      
-     ```
+  ```
      pull, 继承PullConsumerJob即可，run中进行消费
      
      @Component
@@ -184,4 +184,4 @@ java框架
      private DefaultMQProducer defaultMQProducer;
      
      
-     ``` 
+ ``` 
