@@ -16,6 +16,15 @@ server:
     context-path: /easybuild
   port: 8080
 
+# apollo 配置中心
+app:
+  id: apollo-demo
+apollo:
+  bootstrap:
+    enable: false
+    namespaces: application
+
+# easybuild 框架相关配置
 easy:
   swagger:
     enable: true
@@ -103,7 +112,7 @@ easy:
 #        codec: !<org.redisson.codec.SmileJacksonCodec> {}
         transportMode: "NIO"
 
-
+# 加密
 jasypt:
   encryptor:
     password: encodepassword # 加密秘钥

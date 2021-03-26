@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mq-common</artifactId>
+    <artifactId>message-queue-common</artifactId>
 
     <dependencies>
         <dependency>

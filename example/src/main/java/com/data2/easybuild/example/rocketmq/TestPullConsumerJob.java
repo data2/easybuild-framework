@@ -1,7 +1,7 @@
 package com.data2.easybuild.example.rocketmq;
 
+import com.data2.easybuild.message.queue.common.rocketmq.AbstractPullConsumerJob;
 import com.data2.easybuild.message.queue.common.rocketmq.Consumer;
-import com.data2.easybuild.message.queue.common.rocketmq.PullConsumerJob;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Consumer(consumerGroup = "test_consumer_group", topic = "test_topic", namesrvAddr = "")
-public class TestPullConsumerJob extends PullConsumerJob {
+public class TestPullConsumerJob extends AbstractPullConsumerJob {
 
     @Override
-    public void run() {
+    public void run(String... args) {
         // DO your business, with consumer
         //consumer.fetchConsumeOffset();
     }

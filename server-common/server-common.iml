@@ -95,7 +95,6 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-oxm:5.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.redisson:redisson:3.10.1" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.54.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.54.Final" level="project" />
@@ -114,6 +113,8 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.3" level="project" />
     <orderEntry type="library" name="Maven: org.jodd:jodd-bean:3.7.1" level="project" />
     <orderEntry type="library" name="Maven: org.jodd:jodd-core:3.7.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-cache:2.4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.3.1" level="project" />
     <orderEntry type="module" module-name="message-queue-common" />
     <orderEntry type="library" name="Maven: org.apache.rocketmq:rocketmq-client:4.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.rocketmq:rocketmq-common:4.3.0" level="project" />
@@ -122,6 +123,13 @@
     <orderEntry type="library" name="Maven: org.apache.rocketmq:rocketmq-logging:4.3.0" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-tcnative-boringssl-static:2.0.34.Final" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
+    <orderEntry type="module" module-name="config-center-common" />
+    <orderEntry type="library" name="Maven: com.ctrip.framework.apollo:apollo-client:1.8.0" level="project" />
+    <orderEntry type="library" name="Maven: com.ctrip.framework.apollo:apollo-core:1.8.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
+    <orderEntry type="library" name="Maven: com.google.inject:guice:4.1.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
     <orderEntry type="library" name="Maven: redis.clients:jedis:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.9.0" level="project" />
     <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-ui:2.9.2" level="project" />

@@ -1,6 +1,7 @@
 package com.data2.easybuild.message.queue.common.rocketmq;
 
 import com.data2.easybuild.api.common.exception.EasyBusinessException;
+import com.data2.easybuild.api.common.utils.ParamUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.client.consumer.DefaultMQPullConsumer;
@@ -10,9 +11,7 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -25,9 +24,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Slf4j
 @Component
-public class LoadThread implements BeanPostProcessor, ApplicationContextAware {
-
-    private ApplicationContext applicationContext;
+public class LoadThread extends ConsumerLoader {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -49,14 +46,15 @@ public class LoadThread implements BeanPostProcessor, ApplicationContextAware {
                     throw new EasyBusinessException("consumer namesrvAddr must config, please check your configuration!");
                 }
             }
-            if (bean instanceof PullConsumerJob) {
-                ((PullConsumerJob) bean).setConsumer(new DefaultMQPullConsumer(annotation.consumerGroup()));
-                DefaultMQPullConsumer consumer = (DefaultMQPullConsumer) ((PullConsumerJob) bean).getConsumer();
+            check(ParamUtil.returnNotNull(annotation.consumerGroup(), rocketMqConsumerConfig.group));
+            if (bean instanceof AbstractPullConsumerJob) {
+                ((AbstractPullConsumerJob) bean).setConsumer(new DefaultMQPullConsumer(annotation.consumerGroup()));
+                DefaultMQPullConsumer consumer = (DefaultMQPullConsumer) ((AbstractPullConsumerJob) bean).getConsumer();
                 consumer.setNamesrvAddr(annotation.namesrvAddr());
             }
-            if (bean instanceof PushConsumerJob) {
-                ((PushConsumerJob) bean).setConsumer(new DefaultMQPushConsumer(annotation.consumerGroup()));
-                DefaultMQPushConsumer consumer = (DefaultMQPushConsumer) ((PushConsumerJob) bean).getConsumer();
+            if (bean instanceof AbstractPushConsumerJob) {
+                ((AbstractPushConsumerJob) bean).setConsumer(new DefaultMQPushConsumer(annotation.consumerGroup()));
+                DefaultMQPushConsumer consumer = (DefaultMQPushConsumer) ((AbstractPushConsumerJob) bean).getConsumer();
                 consumer.setNamesrvAddr(annotation.namesrvAddr());
                 MessageListener messageListener = (MessageListener) applicationContext.getBean(annotation.listener());
                 try {
@@ -79,19 +77,23 @@ public class LoadThread implements BeanPostProcessor, ApplicationContextAware {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        return bean;
+    }
+
+    private Object threadPoolWay(Object bean, String beanName) {
         Consumer annotation = bean.getClass().getAnnotation(Consumer.class);
         if (Objects.nonNull(annotation)) {
-            if (bean instanceof PullConsumerJob) {
+            if (bean instanceof AbstractPullConsumerJob) {
                 try {
-                    ((PullConsumerJob) bean).getConsumer().start();
+                    ((AbstractPullConsumerJob) bean).getConsumer().start();
                     ((ThreadPoolExecutor)applicationContext.getBean("threadPool")).execute((Runnable) bean);
                 } catch (MQClientException e) {
                     e.printStackTrace();
                 }
             }
-            if (bean instanceof PushConsumerJob){
+            if (bean instanceof AbstractPushConsumerJob){
                 try {
-                    ((PushConsumerJob) bean).getConsumer().start();
+                    ((AbstractPushConsumerJob) bean).getConsumer().start();
                 } catch (MQClientException e) {
                     e.printStackTrace();
                 }

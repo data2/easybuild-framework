@@ -1,6 +1,7 @@
 package com.data2.easybuild.message.queue.common.rocketmq;
 
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.boot.CommandLineRunner;
 
 import java.util.Objects;
 
@@ -9,5 +10,5 @@ import java.util.Objects;
  * @description
  * @date 2021/3/24 下午3:26
  */
-public interface MqConsumer extends DisposableBean , Runnable{
+public interface MqConsumer extends DisposableBean , CommandLineRunner {
 }

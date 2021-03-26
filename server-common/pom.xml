@@ -42,7 +42,12 @@
         </dependency>
         <dependency>
             <groupId>com.data2.easybuild</groupId>
-            <artifactId>mq-common</artifactId>
+            <artifactId>message-queue-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.data2.easybuild</groupId>
+            <artifactId>config-center-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

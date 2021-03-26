@@ -50,16 +50,16 @@ public class EasyRestTemplate extends RestTemplate {
     @Bean
     public PoolingHttpClientConnectionManager poolingHttpClientConnectionManager() {
         PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager();
-        poolingHttpClientConnectionManager.setMaxTotal(ParamUtil.isNull(connectTimeout, 100));
-        poolingHttpClientConnectionManager.setDefaultMaxPerRoute(ParamUtil.isNull(connectTimeout, 100));
+        poolingHttpClientConnectionManager.setMaxTotal(ParamUtil.nullReturnDefaultVal(connectTimeout, 100));
+        poolingHttpClientConnectionManager.setDefaultMaxPerRoute(ParamUtil.nullReturnDefaultVal(connectTimeout, 100));
         return poolingHttpClientConnectionManager;
     }
 
     @Bean
     public RequestConfig requestConfig() {
-        return RequestConfig.custom().setConnectionRequestTimeout(ParamUtil.isNull(connectionRequestTimeout, 30 * 1000))
-                .setConnectTimeout(ParamUtil.isNull(connectTimeout, 60 * 1000))
-                .setSocketTimeout(ParamUtil.isNull(socketTimeout, 60 * 1000)).build();
+        return RequestConfig.custom().setConnectionRequestTimeout(ParamUtil.nullReturnDefaultVal(connectionRequestTimeout, 30 * 1000))
+                .setConnectTimeout(ParamUtil.nullReturnDefaultVal(connectTimeout, 60 * 1000))
+                .setSocketTimeout(ParamUtil.nullReturnDefaultVal(socketTimeout, 60 * 1000)).build();
     }
 
     @Bean
