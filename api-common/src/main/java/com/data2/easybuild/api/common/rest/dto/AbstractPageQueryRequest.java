@@ -20,7 +20,7 @@ public abstract class AbstractPageQueryRequest extends AbstractQueryRequest {
     @Override
     public void check() {
         super.check();
-        ParamUtil.isNull(pageParam,"分页参数不能为空");
+        ParamUtil.nullThrowException(pageParam,"分页参数不能为空");
         pageParam.check();
     }
 }
