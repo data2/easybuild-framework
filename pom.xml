@@ -40,6 +40,7 @@
         <redisson-spring-data-24.version>3.15.1</redisson-spring-data-24.version>
         <rocketmq-client.version>4.3.0</rocketmq-client.version>
         <spring-expression.version>5.3.5</spring-expression.version>
+        <apollo-client.version>1.8.0</apollo-client.version>
     </properties>
 
     <dependencyManagement>
@@ -70,6 +71,12 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-configuration</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-cache</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
 
@@ -145,6 +152,12 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-expression</artifactId>
                 <version>${spring-expression.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client</artifactId>
+                <version>${apollo-client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
