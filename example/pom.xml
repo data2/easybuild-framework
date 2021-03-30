@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <easy.version>0.0.1-SNAPSHOT</easy.version>
     </properties>
 
     <dependencies>
@@ -23,7 +24,22 @@
         <dependency>
             <groupId>com.data2.easybuild</groupId>
             <artifactId>server-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${easy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.data2.easybuild</groupId>
+            <artifactId>redis-common</artifactId>
+            <version>${easy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.data2.easybuild</groupId>
+            <artifactId>message-queue-common</artifactId>
+            <version>${easy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.data2.easybuild</groupId>
+            <artifactId>config-center-common</artifactId>
+            <version>${easy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

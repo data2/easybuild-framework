@@ -19,6 +19,8 @@
         <module>utils-common</module>
         <module>message-queue-common</module>
         <module>config-center-common</module>
+        <module>kaptcha-common</module>
+        <module>database-common</module>
     </modules>
 
 

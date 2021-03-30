@@ -36,23 +36,9 @@
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.data2.easybuild</groupId>
-            <artifactId>redis-common</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.data2.easybuild</groupId>
-            <artifactId>message-queue-common</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.data2.easybuild</groupId>
-            <artifactId>config-center-common</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
