@@ -1,4 +1,9 @@
 # easybuild-framework
+
+[![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Build Status](https://travis-ci.org/data2/easybuild-framework.svg?branch=main)](https://travis-ci.org/data2/easybuild-framework)
+[![Coverage Status](https://coveralls.io/repos/github/data2/salmon/badge.svg)](https://coveralls.io/github/data2/salmon)
+
 java框架
 
 # Aop
