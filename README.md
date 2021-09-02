@@ -8,30 +8,24 @@
 
 通过切面Aspect 对所有的controller中的方法进行拦截 
 
-    入参统一校验
-    解决-请求重复提交
-    记录日志  TODO：指定方式 发送kafka、控制台打印
-    统计接口耗时
-    统一异常处理
-    统一出参格式
+ + 入参统一校验
+ + 解决-请求重复提交
+ + 记录日志  TODO：指定方式 发送kafka、控制台打印
+ + 统计接口耗时
+ + 统一异常处理
+ + 统一出参格式
 
 # 配置文件加密jasypt
-    1Application.java上增加注解@EnableEncryptableProperties；
 
-    2增加配置文件jasypt.encryptor.password = encodepawd，这是加密的秘钥；
+1、Application.java上增加注解@EnableEncryptableProperties；
 
-    3所有明文密码替换为ENC(加密字符串)，例如ENC(XW2daxuaTftQ+F2iYPQu0g==)；
-    
-    4引入一个MAVEN依赖；
-        maven坐标如下：
-        <dependency>
-            <groupId>com.github.ulisesbocchio</groupId>
-            <artifactId>jasypt-spring-boot</artifactId>
-            <version>2.0.0</version>
-        </dependency>
-    
-        其中第三步的加密字符串的生成方式为：
-        java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="dbpassword" password=encodepawd algorithm=PBEWithMD5AndDES
+2、增加配置文件jasypt.encryptor.password = encodepawd，这是加密的秘钥；
+
+3、所有明文密码替换为ENC(加密字符串)，例如ENC(XW2daxuaTftQ+F2iYPQu0g==)；
+
+4、其中第三步的加密字符串的生成方式为：
++ 加密java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="dbpassword" password=encodepawd algorithm=PBEWithMD5AndDES
++ 解密java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringDecryptionCLI input="BRn0kKO3x7NVaziI1f2/8ovMh+0IhZ2P" password=dqbusi123456 algorithm=PBEWithMD5AndDES
 
 
 # 防重 - 请求
