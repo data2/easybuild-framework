@@ -4,11 +4,15 @@
 [![Build Status](https://travis-ci.org/data2/easybuild-framework.svg?branch=main)](https://travis-ci.org/data2/easybuild-framework)
 [![Coverage Status](https://coveralls.io/repos/github/data2/easybuild-framework/badge.svg?branch=main)](https://coveralls.io/github/data2/easybuild-framework?branch=main)
 
- ______     ______     ______     __  __     ______     __  __     __     __         _____
-/\  ___\   /\  __ \   /\  ___\   /\ \_\ \   /\  == \   /\ \/\ \   /\ \   /\ \       /\  __-.
-\ \  __\   \ \  __ \  \ \___  \  \ \____ \  \ \  __<   \ \ \_\ \  \ \ \  \ \ \____  \ \ \/\ \
- \ \_____\  \ \_\ \_\  \/\_____\  \/\_____\  \ \_____\  \ \_____\  \ \_\  \ \_____\  \ \____-
-  \/_____/   \/_/\/_/   \/_____/   \/_____/   \/_____/   \/_____/   \/_/   \/_____/   \/____/
+                      _           _ _     _
+                     | |         (_) |   | |
+  ___  __ _ ___ _   _| |__  _   _ _| | __| |
+ / _ \/ _` / __| | | | '_ \| | | | | |/ _` |
+|  __/ (_| \__ \ |_| | |_) | |_| | | | (_| |
+ \___|\__,_|___/\__, |_.__/ \__,_|_|_|\__,_|
+                 __/ |
+                |___/
+
 
 # Aop
 
