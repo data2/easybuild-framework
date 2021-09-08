@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 @ConditionalOnBean(RedissonClient.class)
 @ConditionalOnProperty(prefix = "easy.dup", name = "open", havingValue = "true")
 public class RequestDupIntecept {
+    public static final String NAME = "RequestDupIntecept";
     @Autowired
     private RedissonClient redissonClient;
 

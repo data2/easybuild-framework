@@ -17,6 +17,7 @@ import com.data2.easybuild.server.common.env.ServerLog;
 import com.data2.easybuild.server.common.env.SpringContextHolder;
 import com.data2.easybuild.server.common.lock.RequestDupIntecept;
 import com.data2.easybuild.server.common.util.IpUtils;
+import jodd.exception.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -53,6 +54,7 @@ public abstract class AbstractOpenApiAop {
                     if (arg instanceof AbstractRequest) {
                         ((AbstractRequest) arg).check();
                         if (!gotFirstInput) {
+                            gotFirstInput = true;
                             request = (AbstractRequest) arg;
                         }
                     }
@@ -90,7 +92,12 @@ public abstract class AbstractOpenApiAop {
                     key.append(String.valueOf(request.toString().hashCode()));
                     break;
             }
-            SpringContextHolder.getBean(RequestDupIntecept.class).intercept(key.toString(), String.valueOf(anno.timeout()));
+            RequestDupIntecept bean = SpringContextHolder.getBean(RequestDupIntecept.class, RequestDupIntecept.NAME);
+            if (Objects.isNull(bean)){
+                log.error("防重功能失败，请先开启该项配置，easy.dup.open=true，并且配置redis");
+                return;
+            }
+            bean.intercept(key.toString(), String.valueOf(anno.timeout()));
         }
 
     }
@@ -110,21 +117,23 @@ public abstract class AbstractOpenApiAop {
         }
     }
 
-    protected void failLog(Date start, AbstractRequest request, EasyBusinessException throwable) {
-        ServerLog serverLog = new ServerLog();
-        serverLog.setInterfaceCostTime((System.currentTimeMillis() - start.getTime()) / 1000);
-        serverLog.setErrMsg(throwable.getMessage());
-        serverLog.setRequest(request != null ? request.getClass().getName() : null);
-        serverLog.setUuid(request != null ? request.getUuid() : null);
+    private void failLog(Date start, AbstractRequest request, EasyBusinessException throwable) {
+        ServerLog serverLog = new ServerLog()
+                .setInterfaceCostTime((System.currentTimeMillis() - start.getTime()) / 1000)
+                .setErrMsg(ExceptionUtil.exceptionChainToString(throwable))
+                .setRequest(JSON.toJSONString(request))
+                .setRequestClass(request != null ? request.getClass().getName(): null)
+                .setUuid(request != null ? request.getUuid() : null);
         log.info("失败日志:{}", JSON.toJSONString(serverLog));
     }
 
     private void okLog(Date start, AbstractRequest request, Object response) {
-        ServerLog serverLog = new ServerLog();
-        serverLog.setInterfaceCostTime((System.currentTimeMillis() - start.getTime()) / 1000);
-        serverLog.setRequest(request != null ? request.getClass().getName() : null);
-        serverLog.setUuid(request != null ? request.getUuid() : null);
-        serverLog.setResponse(JSON.toJSONString(response));
+        ServerLog serverLog = new ServerLog()
+                .setInterfaceCostTime((System.currentTimeMillis() - start.getTime()) / 1000)
+                .setRequest(JSON.toJSONString(request))
+                .setRequestClass(request != null ? request.getClass().getName(): null)
+                .setUuid(request != null ? request.getUuid() : null)
+                .setResponse(JSON.toJSONString(response));
         log.info("成功日志:{}", JSON.toJSONString(serverLog));
     }
 

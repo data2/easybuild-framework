@@ -20,6 +20,10 @@ public class SpringContextHolder implements ApplicationContextAware {
         return applicationContext.getBean(cls);
     }
 
+    public static <T> T getBean(Class<? extends T> cls, String clsName) {
+        return applicationContext.containsBean(clsName) ? getBean(cls): null;
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringContextHolder.applicationContext = applicationContext;
