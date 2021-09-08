@@ -4,6 +4,9 @@
 [![Build Status](https://travis-ci.org/data2/easybuild-framework.svg?branch=main)](https://travis-ci.org/data2/easybuild-framework)
 [![Coverage Status](https://coveralls.io/repos/github/data2/easybuild-framework/badge.svg?branch=main)](https://coveralls.io/github/data2/easybuild-framework?branch=main)
 
+![image](https://user-images.githubusercontent.com/13504729/132335761-e1241d9a-3151-4cfe-941d-f657608c8447.png)
+
+
 # Aop
 
 通过切面Aspect 对所有的controller中的方法进行拦截 
