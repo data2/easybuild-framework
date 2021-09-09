@@ -80,7 +80,7 @@ encrypt-request:
 ```
 
 测试
-```
+```java
 启动example，访问http://localhost:8080/easybuild/okay/testEncrypt
 
     @PostMapping("/testEncrypt")
