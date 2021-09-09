@@ -20,11 +20,14 @@
 
 # 配置文件加密jasypt
 
+```
 1、Application.java上增加注解@EnableEncryptableProperties；
 
 2、增加配置文件jasypt.encryptor.password = encodepawd，这是加密的秘钥；
 
 3、所有明文密码替换为ENC(加密字符串)，例如ENC(XW2daxuaTftQ+F2iYPQu0g==)；
+
+```
 
 4、其中第三步的加密字符串的生成方式为：
 + 加密java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="dbpassword" password=encodepawd algorithm=PBEWithMD5AndDES
@@ -45,19 +48,52 @@
     
     easy.dup.open: true
 
+ # 请求参数加密 
+
+eg:
+```
+京东后台 >
+       微信支付网关
+美团后台 >
+```
+商家后台对请求微信支付网关的接口入参进行加密，微信解密
+
+所以如果您想要将自己服务的接口安全的暴露给其他调用者，可以使用加密功能
+
+ ```
+支持@RequestBody post方式 application/json
+    
+encrypt-request:
+ enable: true
+      
+前端传递参数公钥加密，后台私钥解密，私钥存储在resources/key/private_key.txt
+```
 
 # 是否开启分布式锁
 
     easy.lock.open: true
     
 # redis配置 
+
     easy:
-        redis:
-            host: localhost
-            port: 6379
-            maxTotal:
-            maxIdle:
-            minIdle:
+      redis:
+        redisson:
+          file: classpath:redisson.yaml
+          config:
+            singleServerConfig:
+              idleConnectionTimeout: 10000
+              connectTimeout: 10000
+              timeout: 3000
+              retryAttempts: 3
+              retryInterval: 1500
+              subscriptionsPerConnection: 5
+              address: "redis://127.0.0.1:6379"
+              subscriptionConnectionMinimumIdleSize: 1
+              subscriptionConnectionPoolSize: 50
+              connectionMinimumIdleSize: 24
+              connectionPoolSize: 64
+              database: 0
+              dnsMonitoringInterval: 5000
 
 # http线程池配置
  
@@ -107,13 +143,6 @@
               - /**/*.woff
               - /**/*.ttf
    
- # 请求参数加密 
-    支持@RequestBody post方式 application/json
-    
-    encrypt-request:
-      enable: true
-      
-    前端传递参数公钥加密，后台私钥解密，私钥存储在resources/key/private_key.txt
 
 # 序列生成器
     
