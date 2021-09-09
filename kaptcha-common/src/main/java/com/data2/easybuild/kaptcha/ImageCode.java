@@ -9,43 +9,19 @@ import java.util.Random;
 
 public class ImageCode {
 
-    int width = 79;
-    int height = 30;
-    Random r = new Random();
-    /**
-     * 在图片中插入字母和十个数字
-     */
-    String str = "abcdefghijklmnupqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWZYZ1234567890";
-    String[] font = {"宋体", "华文楷体", "华文隶书", "黑体", "华文新魏"};//字体
-    int[] fontSize = {24, 25, 26, 27, 28};
-    int[] fontStyle = {0, 1, 2, 3};
-    /*
-    验证码
-     */
-    private String validateCode = "";
-    /**
-     * 图片
-     */
+    private String codeId;
+    private String validateCode;
     private BufferedImage bufferedImage;
 
-    /**
-     * //生成验证码图片的方法
-     *
-     * @return
-     */
-    private BufferedImage CreateBufferedImage() {
-        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);//内存中创建一张图片
-        Graphics gps = img.getGraphics();//获取当前图片的画笔
-        gps.setColor(new Color(240, 240, 240));//设置画笔
-        gps.fillRect(0, 0, width, height);//填充一个与图片一样大小的矩形（其实就是为了设置背景颜色）
-        return img;
+    ImageCode() {
     }
 
-    /**
-     * @return
-     */
-    public ImageCode CreateImage() {
-        bufferedImage = CreateBufferedImage();
+    ImageCode(String codeId) {
+        this.codeId = codeId;
+    }
+
+    public ImageCode createImage() {
+        bufferedImage = createBufferedImage();
         Graphics gps = bufferedImage.getGraphics();//获取当前图片的画笔
         StringBuilder sb = new StringBuilder();
         //开始画东西
@@ -62,15 +38,12 @@ public class ImageCode {
 
     }
 
-    /**
-     * for test u can do like this >
-     * ImageIO.write(img, "JPEG", new FileOutputStream("F:\\a.jpg"));//保存到硬盘
-     *
-     * @param out
-     * @throws IOException
-     */
-    public void saveImage(OutputStream out) throws IOException {
-        ImageIO.write(bufferedImage, "JPEG", out);
+    private BufferedImage createBufferedImage() {
+        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);//内存中创建一张图片
+        Graphics gps = img.getGraphics();//获取当前图片的画笔
+        gps.setColor(new Color(240, 240, 240));//设置画笔
+        gps.fillRect(0, 0, width, height);//填充一个与图片一样大小的矩形（其实就是为了设置背景颜色）
+        return img;
     }
 
     private String getContent() {
@@ -87,12 +60,6 @@ public class ImageCode {
         return new Font(name, style, size);
     }
 
-    /**
-     * //得到不同的颜色
-     * //取值范围是0-255
-     *
-     * @return
-     */
     private Color getColor() {
         int R = r.nextInt(256);
         int G = r.nextInt(256);
@@ -100,11 +67,6 @@ public class ImageCode {
         return new Color(R, G, B);
     }
 
-    /**
-     * //画干扰线
-     *
-     * @param img
-     */
     private void drawLine(BufferedImage img) {
         Graphics2D gs = (Graphics2D) img.getGraphics();
         gs.setColor(Color.BLACK);
@@ -120,8 +82,38 @@ public class ImageCode {
         }
     }
 
-    public String getValidateCode() {
-        return this.validateCode;
+    public CodeEntity getCodeEntity() {
+        return new CodeEntity(codeId, validateCode);
     }
+
+    public BufferedImage getBufferedImage() {
+        return bufferedImage;
+    }
+
+    /**
+     * for test u can do like this >
+     * ImageIO.write(img, "JPEG", new FileOutputStream("F:\\a.jpg"));//保存到硬盘
+     *
+     * @param out
+     * @throws IOException
+     */
+    public void printImage(OutputStream out) throws IOException {
+        ImageIO.write(bufferedImage, "JPEG", out);
+    }
+
+
+    public static final int width = 79;
+    public static final int height = 30;
+    private Random r = new Random();
+    /**
+     * 在图片中插入字母和十个数字
+     */
+    public static final String str = "abcdefghijklmnupqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWZYZ1234567890";
+    public static final String[] font = {"宋体", "华文楷体", "华文隶书", "黑体", "华文新魏"};//字体
+    public static final int[] fontSize = {24, 25, 26, 27, 28};
+    public static final int[] fontStyle = {0, 1, 2, 3};
+
+
+
 
 }

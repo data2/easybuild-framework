@@ -10,17 +10,26 @@ public class CodeEntity {
     private String codeId;
     private String validateCode;
 
-    public String getCodeId() {
-        return codeId;
+    CodeEntity() {
+
     }
 
-    public String getValidateCode() {
-        return validateCode;
+    CodeEntity(String codeId, String validateCode) {
+        this.codeId = codeId;
+        this.validateCode = validateCode;
+    }
+
+    public String getCodeId() {
+        return codeId;
     }
 
     public CodeEntity setCodeId(String codeId) {
         this.codeId = codeId;
         return this;
+    }
+
+    public String getValidateCode() {
+        return validateCode;
     }
 
     public CodeEntity setValidateCode(String validateCode) {
