@@ -201,7 +201,7 @@ curl -X POST "http://localhost:8081/easybuild/okay/testEncrypt" -H "accept: */*"
     
     pull push 消费两种方式
     
-    ```
+```
     easy:
         rocketmq:
              producer:
@@ -216,9 +216,9 @@ curl -X POST "http://localhost:8081/easybuild/okay/testEncrypt" -H "accept: */*"
                group: ConsumerGroup
                topic: default_topic
                tag: '*'   
-     ```
+```
      
-  ```
+```java
      pull, 继承PullConsumerJob即可，run中进行消费
      
      @Component
@@ -263,10 +263,10 @@ curl -X POST "http://localhost:8081/easybuild/okay/testEncrypt" -H "accept: */*"
 
 ```java
 
-@Component
-public class ServiceImpl extends AbstractImageCode{
-}
+ @Component
+ public class ServiceImpl extends AbstractImageCode{
+ }
 
-继承抽象类，saveCode、getCode实现验证码的存 取
+ 继承抽象类，saveCode、getCode实现验证码的存 取
 
 ```
