@@ -1,4 +1,4 @@
-package com.data2.easybuild.server.common.util;
+package com.data2.easybuild.utils;
 
 /**
  * @author data2
@@ -7,6 +7,7 @@ package com.data2.easybuild.server.common.util;
  */
 
 import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

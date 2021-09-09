@@ -1,4 +1,4 @@
-package com.data2.easybuild.server.common.util;
+package com.data2.easybuild.utils;
 
 /**
  * @author data2
