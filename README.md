@@ -47,6 +47,16 @@
     后端设计到请求级别，controller增加注解 @DisableDuplicateSubmit
     
     easy.dup.open: true
+    
+实验
+```java
+    @PostMapping("/testDup")
+    @DisableDuplicateSubmit(type = DupEnum.REQUEST_HASH, timeout = 2000)
+    @ResponseBody
+    public Object testDup(@RequestBody OrderBean orderBean){
+        return orderBean.getOrderId();
+    }
+```
 
  # 请求参数加密 
 
