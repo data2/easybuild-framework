@@ -1,7 +1,9 @@
 package com.data2.easybuild.api.common.utils;
 
 import com.data2.easybuild.api.common.dto.PageParam;
+import com.data2.easybuild.api.common.exception.EasyBusinessException;
 import com.data2.easybuild.api.common.exception.EasyInvalidArgsException;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
@@ -12,9 +14,22 @@ import java.util.Objects;
  */
 public class ParamUtil {
 
+    public static <T> void emptyThrowException(String object, String message) {
+        if (StringUtils.isEmpty(object)){
+            throw new EasyBusinessException(message);
+        }
+    }
+
+    public static String emptyReturnDefaultVal(String object, String defaultVal) {
+        if (StringUtils.isEmpty(object)){
+            return defaultVal;
+        }
+        return object;
+    }
+
     public static <T> void nullThrowException(T object, String message) {
         if (Objects.isNull(object)){
-            throw new EasyInvalidArgsException(message);
+            throw new EasyBusinessException(message);
         }
     }
 

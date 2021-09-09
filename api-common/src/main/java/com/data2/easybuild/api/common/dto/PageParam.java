@@ -1,7 +1,6 @@
 package com.data2.easybuild.api.common.dto;
 
 import com.data2.easybuild.api.common.utils.ParamUtil;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
