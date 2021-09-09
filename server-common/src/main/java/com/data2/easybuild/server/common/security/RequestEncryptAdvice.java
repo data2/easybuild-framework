@@ -1,6 +1,6 @@
 package com.data2.easybuild.server.common.security;
 
-import com.data2.easybuild.server.common.util.RsaUtil;
+import com.data2.easybuild.utils.RsaUtil;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.apache.commons.io.IOUtils;
@@ -39,7 +39,7 @@ public class RequestEncryptAdvice extends RequestBodyAdviceAdapter implements In
         String httpBody = StreamUtils.copyToString(inputMessage.getBody(), Charset.defaultCharset());
         if (judgeEnable(parameter)){
             try {
-                httpBody = RsaUtil.decryptByPrivateKey(privateKey, httpBody);
+                httpBody = RsaUtil.decrypt(httpBody,privateKey);
             } catch (Exception e) {
                 e.printStackTrace();
             }
