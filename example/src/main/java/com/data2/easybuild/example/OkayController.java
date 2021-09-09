@@ -42,13 +42,16 @@ public class OkayController {
 
     @PostMapping("/testEncrypt")
     @EncryptRequest
+    @ResponseBody
     public Object testEncrypt(@RequestBody OrderBean orderBean){
+        System.out.println(orderBean);
         return orderBean.getOrderId();
     }
 
-    @GetMapping("/testDup")
+    @PostMapping("/testDup")
     @DisableDuplicateSubmit(type = DupEnum.REQUEST_HASH, timeout = 2000)
-    public Object testDup(OrderBean orderBean){
+    @ResponseBody
+    public Object testDup(@RequestBody OrderBean orderBean){
         return orderBean.getOrderId();
     }
 }

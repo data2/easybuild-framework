@@ -19,6 +19,6 @@ public class OrderBean extends AbstractRestRequest {
     @Override
     public void check() {
         super.check();
-        ParamUtil.nullThrowException(orderId, "orderId不能为空");
+        ParamUtil.emptyThrowException(orderId, "orderId不能为空");
     }
 }
