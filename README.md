@@ -258,3 +258,15 @@ curl -X POST "http://localhost:8081/easybuild/okay/testEncrypt" -H "accept: */*"
      
      
  ``` 
+
+# 验证码
+
+```java
+
+@Component
+public class ServiceImpl extends AbstractImageCode{
+}
+
+继承抽象类，saveCode、getCode实现验证码的存 取
+
+```
