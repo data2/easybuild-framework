@@ -21,12 +21,16 @@ import org.springframework.stereotype.Component;
 @Configuration
 public class RedissonConfiguration {
 
+    private static final String TEST_STR = "1111";
+
     @Autowired
     private RedissonConfig redissonConfig;
 
     @Bean
     @ConditionalOnClass(RedissonConfig.class)
     public RedissonClient redissonClient(){
-        return Redisson.create(redissonConfig);
+        RedissonClient client = Redisson.create(redissonConfig);
+        client.getAtomicLong(TEST_STR);
+        return client;
     }
 }
