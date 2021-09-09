@@ -74,7 +74,7 @@ eg:
 支持@RequestBody post方式 application/json
     
 encrypt-request:
- enable: true
+    enable: true
       
 前端传递参数公钥加密，后台私钥解密，私钥存储在resources/key/private_key.txt
 ```
@@ -82,6 +82,14 @@ encrypt-request:
 测试
 ```
 启动example，访问http://localhost:8080/easybuild/okay/testEncrypt
+
+    @PostMapping("/testEncrypt")
+    @EncryptRequest
+    @ResponseBody
+    public Object testEncrypt(@RequestBody OrderBean orderBean){
+        System.out.println(orderBean);
+        return orderBean.getOrderId();
+    }
 
 curl -X POST "http://localhost:8081/easybuild/okay/testEncrypt" -H "accept: */*" -H "Content-Type: application/json" -d "IHXX1i8IGuy211ecqsE9X3kpKXbbTwUUNz5wuFkkbUFUDCDzf69t243wEyS9VZ951aR85zYeLiMzHr8gmcYhuGZwNq9/seAyFrxPd4EvNXGrZmcHN/klJoibYIJYW6usIMg5ceNSQeAMK6jFUjIv02fYK7aCjOmJ6LwxWfsKn7dnAC86FzV0zCnWTGQSKnoz52/ghX7tU5Q+66V5SihZKM7s7LTKICQPmwZ/H1NRbzUHR1pLzox/kRTkx46LnNYKLRuaswEC8PGq4dnxL36WPH3kMe+ELXOa1Az7U1jGVSFBrPN/3Ts1C6npea9BzF2LvX7pQsOavjOhctgW6QNh3A=="
 
