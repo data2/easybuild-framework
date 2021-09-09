@@ -14,7 +14,7 @@ spring:
 server:
   servlet:
     context-path: /easybuild
-  port: 8080
+  port: 8081
 
 # apollo 配置中心
 app:
@@ -33,7 +33,7 @@ easy:
     debug: true
     pretty: false
   dup: # 是否启用 防请求重复提交 支持两种方式
-    open: false
+    open: true
   http:
     connect-timeout: 30000
     connection-request-timeout: 30000
@@ -42,7 +42,7 @@ easy:
     default-max-per-route: 200
   cors:
     enable: true
-    allowOrigin: localhost:8080,local.cecloud.com:8080,chrome-extension://coohjcphdfgbiolnekdpbcijmhambjff
+    allowOrigin: localhost:8080,localhost:8081,local.cecloud.com:8080,chrome-extension://coohjcphdfgbiolnekdpbcijmhambjff
   security: #  请求参数加密 支持@RequestBody post方式 application/json
     encrypt-request:
       enable: true
@@ -79,38 +79,20 @@ easy:
     redisson:
       file: classpath:redisson.yaml
       config:
-        clusterServersConfig:
+        singleServerConfig:
           idleConnectionTimeout: 10000
           connectTimeout: 10000
           timeout: 3000
           retryAttempts: 3
           retryInterval: 1500
-          failedSlaveReconnectionInterval: 3000
-          failedSlaveCheckInterval: 60000
-          password: U20WtKUOat!iibr7
           subscriptionsPerConnection: 5
-          clientName: null
-#          loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
+          address: "redis://127.0.0.1:6379"
           subscriptionConnectionMinimumIdleSize: 1
           subscriptionConnectionPoolSize: 50
-          slaveConnectionMinimumIdleSize: 24
-          slaveConnectionPoolSize: 64
-          masterConnectionMinimumIdleSize: 24
-          masterConnectionPoolSize: 64
-          readMode: "SLAVE"
-          subscriptionMode: "SLAVE"
-          nodeAddresses:
-          - "redis://172.24.2.164:13666"
-          - "redis://172.24.2.164:13777"
-          - "redis://172.24.2.164:13888"
-          scanInterval: 1000
-          pingConnectionInterval: 0
-          keepAlive: false
-          tcpNoDelay: false
-        threads: 16
-        nettyThreads: 32
-#        codec: !<org.redisson.codec.SmileJacksonCodec> {}
-        transportMode: "NIO"
+          connectionMinimumIdleSize: 24
+          connectionPoolSize: 64
+          database: 0
+          dnsMonitoringInterval: 5000
 
 # 加密
 jasypt:

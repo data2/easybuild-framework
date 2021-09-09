@@ -40,9 +40,9 @@ public class OkayController {
     }
 
 
-    @GetMapping("/testEncrypt")
+    @PostMapping("/testEncrypt")
     @EncryptRequest
-    public Object testEncrypt(OrderBean orderBean){
+    public Object testEncrypt(@RequestBody OrderBean orderBean){
         return orderBean.getOrderId();
     }
 
