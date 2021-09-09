@@ -72,9 +72,6 @@ easy:
       group: ConsumerGroup
       topic: default_topic
       tag: '*'
-
-
-
   redis:
     redisson:
       file: classpath:redisson.yaml
