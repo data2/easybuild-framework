@@ -29,9 +29,17 @@
 
 ```
 
-4、其中第三步的加密字符串的生成方式为：
-+ 加密java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="dbpassword" password=encodepawd algorithm=PBEWithMD5AndDES
-+ 解密java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringDecryptionCLI input="BRn0kKO3x7NVaziI1f2/8ovMh+0IhZ2P" password=dqbusi123456 algorithm=PBEWithMD5AndDES
+其中第三步的加密字符串的生成方式为
+
+```java
+ 
+ 加密
+ java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="dbpassword" password=encodepawd algorithm=PBEWithMD5AndDES
+ 
+ 解密
+ java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringDecryptionCLI input="BRn0kKO3x7NVaziI1f2/8ovMh+0IhZ2P" password=dqbusi123456 algorithm=PBEWithMD5AndDES
+ 
+```
 
 
 # 防重 - 请求
@@ -47,6 +55,16 @@
     后端设计到请求级别，controller增加注解 @DisableDuplicateSubmit
     
     easy.dup.open: true
+    
+实验
+```java
+    @PostMapping("/testDup")
+    @DisableDuplicateSubmit(type = DupEnum.REQUEST_HASH, timeout = 2000)
+    @ResponseBody
+    public Object testDup(@RequestBody OrderBean orderBean){
+        return orderBean.getOrderId();
+    }
+```
 
  # 请求参数加密 
 
@@ -64,10 +82,35 @@ eg:
 支持@RequestBody post方式 application/json
     
 encrypt-request:
- enable: true
+    enable: true
       
 前端传递参数公钥加密，后台私钥解密，私钥存储在resources/key/private_key.txt
 ```
+
+测试
+```java
+启动example，访问http://localhost:8080/easybuild/okay/testEncrypt
+
+    @PostMapping("/testEncrypt")
+    @EncryptRequest
+    @ResponseBody
+    public Object testEncrypt(@RequestBody OrderBean orderBean){
+        System.out.println(orderBean);
+        return orderBean.getOrderId();
+    }
+
+curl -X POST "http://localhost:8081/easybuild/okay/testEncrypt" -H "accept: */*" -H "Content-Type: application/json" -d "IHXX1i8IGuy211ecqsE9X3kpKXbbTwUUNz5wuFkkbUFUDCDzf69t243wEyS9VZ951aR85zYeLiMzHr8gmcYhuGZwNq9/seAyFrxPd4EvNXGrZmcHN/klJoibYIJYW6usIMg5ceNSQeAMK6jFUjIv02fYK7aCjOmJ6LwxWfsKn7dnAC86FzV0zCnWTGQSKnoz52/ghX7tU5Q+66V5SihZKM7s7LTKICQPmwZ/H1NRbzUHR1pLzox/kRTkx46LnNYKLRuaswEC8PGq4dnxL36WPH3kMe+ELXOa1Az7U1jGVSFBrPN/3Ts1C6npea9BzF2LvX7pQsOavjOhctgW6QNh3A=="
+
+返回
+{
+  "success": true,
+  "data": "1231",
+  "code": "0",
+  "message": "success"
+}
+```
+
+
 
 # 是否开启分布式锁
 
