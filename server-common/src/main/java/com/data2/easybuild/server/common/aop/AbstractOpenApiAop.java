@@ -52,11 +52,11 @@ public abstract class AbstractOpenApiAop {
             if (!Objects.isNull(args) && args.length > 0) {
                 for (Object arg : args) {
                     if (arg instanceof AbstractRequest) {
-                        ((AbstractRequest) arg).check();
                         if (!gotFirstInput) {
                             gotFirstInput = true;
                             request = (AbstractRequest) arg;
                         }
+                        ((AbstractRequest) arg).check();
                     }
                 }
             }
