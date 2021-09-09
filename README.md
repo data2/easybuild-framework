@@ -199,7 +199,7 @@ curl -X POST "http://localhost:8081/easybuild/okay/testEncrypt" -H "accept: */*"
             
 # 集成rocketmq 消息队列
     
-    pull push 消费两种方式
+配置
     
 ```
     easy:
@@ -217,7 +217,9 @@ curl -X POST "http://localhost:8081/easybuild/okay/testEncrypt" -H "accept: */*"
                topic: default_topic
                tag: '*'   
 ```
-     
+    
+pull push 消费两种方式
+
 ```java
      pull, 继承PullConsumerJob即可，run中进行消费
      
