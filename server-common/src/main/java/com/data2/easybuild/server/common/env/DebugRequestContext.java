@@ -1,7 +1,7 @@
 package com.data2.easybuild.server.common.env;
 
 import com.data2.easybuild.api.common.exception.EasyBusinessException;
-import com.data2.easybuild.server.common.util.PropertiesUtil;
+import com.data2.easybuild.utils.PropertiesUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -48,7 +48,7 @@ public class DebugRequestContext extends RequestContext implements InitializingB
             } else {
                 return;
             }
-            PropertiesUtil.print(propertySource.getSource(), log);
+            PropertiesUtil.print(propertySource.getSource());
         });
         log.info("------------------------------------------------------------------------");
     }

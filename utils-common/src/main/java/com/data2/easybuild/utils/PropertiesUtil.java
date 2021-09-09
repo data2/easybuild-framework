@@ -1,5 +1,6 @@
-package com.data2.easybuild.server.common.util;
+package com.data2.easybuild.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 
 import java.util.Map;
@@ -10,8 +11,9 @@ import java.util.Properties;
  * @description
  * @date 2020/11/29 上午12:35
  */
+@Slf4j
 public class PropertiesUtil {
-    public static void print(Object properties, Logger log) {
+    public static void print(Object properties) {
         try {
 
             if (properties instanceof Properties) {
