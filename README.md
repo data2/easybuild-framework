@@ -29,10 +29,11 @@
 
 ```
 
+```java
 4、其中第三步的加密字符串的生成方式为：
 + 加密java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="dbpassword" password=encodepawd algorithm=PBEWithMD5AndDES
 + 解密java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringDecryptionCLI input="BRn0kKO3x7NVaziI1f2/8ovMh+0IhZ2P" password=dqbusi123456 algorithm=PBEWithMD5AndDES
-
+```java
 
 # 防重 - 请求
 
