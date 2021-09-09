@@ -36,7 +36,7 @@ import java.util.Objects;
  * - 优雅停机：接口处理前计数器加1，处理后减1
  * - 数据加锁：RedisLock
  * - 日志记录：成功或失败
- * - 异常转换：Throwable -> GiantException
+ * - 异常转换：Throwable -> EasyBusinessException
  */
 @Slf4j
 public abstract class AbstractOpenApiAop {
@@ -75,7 +75,7 @@ public abstract class AbstractOpenApiAop {
         }
     }
 
-    protected void disableDup(ProceedingJoinPoint proceedingJoinPoint, AbstractRequest request) {
+    protected void disableDup(ProceedingJoinPoint proceedingJoinPoint, AbstractRequest request) throws Exception {
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
         DisableDuplicateSubmit anno = signature.getMethod().getDeclaredAnnotation(DisableDuplicateSubmit.class);
         Class<?> cls = proceedingJoinPoint.getTarget().getClass();
@@ -118,23 +118,21 @@ public abstract class AbstractOpenApiAop {
     }
 
     private void failLog(Date start, AbstractRequest request, EasyBusinessException throwable) {
-        ServerLog serverLog = new ServerLog()
+        log.info("失败日志:{}", JSON.toJSONString(new ServerLog()
                 .setInterfaceCostTime((System.currentTimeMillis() - start.getTime()) / 1000)
                 .setErrMsg(ExceptionUtil.exceptionChainToString(throwable))
                 .setRequest(JSON.toJSONString(request))
                 .setRequestClass(request != null ? request.getClass().getName(): null)
-                .setUuid(request != null ? request.getUuid() : null);
-        log.info("失败日志:{}", JSON.toJSONString(serverLog));
+                .setUuid(request != null ? request.getUuid() : null)));
     }
 
     private void okLog(Date start, AbstractRequest request, Object response) {
-        ServerLog serverLog = new ServerLog()
+        log.info("成功日志:{}", JSON.toJSONString(new ServerLog()
                 .setInterfaceCostTime((System.currentTimeMillis() - start.getTime()) / 1000)
                 .setRequest(JSON.toJSONString(request))
                 .setRequestClass(request != null ? request.getClass().getName(): null)
                 .setUuid(request != null ? request.getUuid() : null)
-                .setResponse(JSON.toJSONString(response));
-        log.info("成功日志:{}", JSON.toJSONString(serverLog));
+                .setResponse(JSON.toJSONString(response))));
     }
 
 }
