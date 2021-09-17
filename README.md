@@ -6,59 +6,58 @@
 
 ![image](https://user-images.githubusercontent.com/13504729/132335761-e1241d9a-3151-4cfe-941d-f657608c8447.png)
 
-
 # Aop
 
-通过切面Aspect 对所有的controller中的方法进行拦截 
+Intercept all methods in the controller through the Aspect
 
- + 入参统一校验
- + 解决-请求重复提交
- + 记录日志  TODO：指定方式 发送kafka、控制台打印
- + 统计接口耗时
- + 统一异常处理
- + 统一出参格式
+ + Unified verification of incoming parameters
+ + Resolve-request repeated submission
+ + Log TODO: specify the method to send Kafka, console print
+ + Time-consuming statistics interface
+ + Unified exception handling
+ + Unified parameter output format
 
-# 配置文件加密jasypt
-
-```
-1、Application.java上增加注解@EnableEncryptableProperties；
-
-2、增加配置文件jasypt.encryptor.password = encodepawd，这是加密的秘钥；
-
-3、所有明文密码替换为ENC(加密字符串)，例如ENC(XW2daxuaTftQ+F2iYPQu0g==)；
+# Configuration file encryption jasypt
 
 ```
+1. Add the annotation @EnableEncryptableProperties to Application.java;
 
-其中第三步的加密字符串的生成方式为
+2. Add the configuration file jasypt.encryptor.password = encodepawd, which is the encryption key;
+
+3. Replace all plaintext passwords with ENC (encrypted string), for example ENC (XW2daxuaTftQ+F2iYPQu0g==);
+
+```
+
+The method of generating the encrypted string in the third step is
 
 ```java
  
-加密
+encryption
 java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="dbpassword" password=encodepawd algorithm=PBEWithMD5AndDES
  
-解密
+Decrypt
 java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringDecryptionCLI input="BRn0kKO3x7NVaziI1f2/8ovMh+0IhZ2P" password=dqbusi123456 algorithm=PBEWithMD5AndDES
  
 ```
 
 
-# 防重 - 请求
+# Anti-weight-request
 
-两种方式
+Two ways
 
 ```
-请求体中frontId前端设值，每次请求传递不同的值，后端依据排重或者请求头中设置frontId
+The frontId in the request body is set at the front-end value, and a different value is passed in each request. The back-end sets the frontId according to the deduplication or the request header.
 
-或者请求体传值hash
+Or request body to pass value hash
 
-然后针对ip+frontId 或者 ip+hash进行redis排重
+Then perform redis reset for ip+frontId or ip+hash
 
-后端设计到请求级别，controller增加注解 @DisableDuplicateSubmit
+The back-end is designed to the request level, and the controller adds the annotation @DisableDuplicateSubmit
     
 easy.dup.open: true
 ```
     
-实验
+experiment
 ```java
 @PostMapping("/testDup")
 @DisableDuplicateSubmit(type = DupEnum.REQUEST_HASH, timeout = 2000)
@@ -68,33 +67,33 @@ public Object testDup(@RequestBody OrderBean orderBean){
 }
 ```
 
- # 请求参数加密 
+ # Request parameter encryption
 
 eg:
 
 ```
-京东后台 >
-        微信支付网关
-美团后台 >
+Jingdong background>
+         WeChat payment gateway
+Meituan Backstage>
 ```
 
-商家后台对请求微信支付网关的接口入参进行加密，微信解密
+The merchant backend encrypts the input parameters of the interface requesting WeChat payment gateway, and decrypts WeChat
 
-所以如果您想要将自己服务的接口安全的暴露给其他调用者，可以使用加密功能
+So if you want to safely expose your service interface to other callers, you can use encryption
 
 ```
-支持@RequestBody post方式 application/json
+Support @RequestBody post method application/json
     
 encrypt-request:
-    enable: true
+     enable: true
       
-前端传递参数公钥加密，后台私钥解密，私钥存储在resources/key/private_key.txt
+The front-end passes parameters public key encryption, background private key decryption, and the private key is stored in resources/key/private_key.txt
 ```
 
-测试
+test
 
 ```java
-启动example，访问http://localhost:8080/easybuild/okay/testEncrypt
+Start the example, visit http://localhost:8080/easybuild/okay/testEncrypt
 
 @PostMapping("/testEncrypt")
 @EncryptRequest
@@ -104,7 +103,7 @@ public Object testEncrypt(@RequestBody OrderBean orderBean){
 
 curl -X POST "http://localhost:8081/easybuild/okay/testEncrypt" -H "accept: */*" -H "Content-Type: application/json" -d "IHXX1i8IGuy211ecqsE9X3kpKXbbTwUUNz5wuFkkbUFUDCDzf69t243wEyS9VZ951aR85zYeLiMzHr8gmcYhuGZwNq9/seAyFrxPd4EvNXGrZmcHN/klJoibYIJYW6usIMg5ceNSQeAMK6jFUjIv02fYK7aCjOmJ6LwxWfsKn7dnAC86FzV0zCnWTGQSKnoz52/ghX7tU5Q+66V5SihZKM7s7LTKICQPmwZ/H1NRbzUHR1pLzox/kRTkx46LnNYKLRuaswEC8PGq4dnxL36WPH3kMe+ELXOa1Az7U1jGVSFBrPN/3Ts1C6npea9BzF2LvX7pQsOavjOhctgW6QNh3A=="
 
-返回
+return
 {
   "success": true,
   "data": "1231",
@@ -113,14 +112,13 @@ curl -X POST "http://localhost:8081/easybuild/okay/testEncrypt" -H "accept: */*"
 }
 ```
 
-
-# 是否开启分布式锁
+# Whether to open the distributed lock
 
 ```
 easy.lock.open: true
 ```
 
-# redis配置 
+# redis configuration
 
 ```yml
 easy:
@@ -159,71 +157,71 @@ easy:
 ```
  
  
-# 跨域请求， 指定开放哪些域名可以访问
+# Cross-domain request, specify which domain names are open for access
 
 ```
 easy:
-  cors:
-    enable: true
-    allowOrigin: localhost:8080
+   cors:
+     enable: true
+     allowOrigin: localhost:8080
 ```
            
-# 是否开启swagger
+# Whether to open swagger
     
 ```
 easy:
-  swagger:
-    enable: true
-    profile: test
+   swagger:
+     enable: true
+     profile: test
 ```
  
- # 打印应用详细环境参数
+  # Print application detailed environmental parameters
 
 ```
 easy:
-  context:
-    debug: true
-    pretty: false
+   context:
+     debug: true
+     pretty: false
 ```
  
 
- # 登陆拦截
+  # Login interception
 
-全局的登陆验证，开启open, 自定义login实现逻辑，实现LoginService接口，声明成组件即可
+Global login verification, open open, customize login implementation logic, implement LoginService interface, and declare it as a component
 
 ```
 easy:
-  login:
-    open: true
-    path-patterns:
-      - /**
-    exclude-path-patterns:
-      - /*/*.html
-      - /*/*.js
-      - /*/*.css
-      - /*/*.woff
-      - /*/*.ttf
+   login:
+     open: true
+     path-patterns:
+       -/**
+     exclude-path-patterns:
+       -/*/*.html
+       -/*/*.js
+       -/*/*.css
+       -/*/*.woff
+       -/*/*.ttf
 
 ```
    
 
-# 序列生成器
+# Sequence generator
     
-采用雪花算法snowFlake，64bit
+Using snowflake algorithm snowFlake, 64bit
 
-配置完毕自动开启
+Automatically open after configuration
 
 ```
 easy:
-  seq:
-    workerId: 1
-    datacenterId: 1
+   seq:
+     workerId: 1
+     datacenterId: 1
 
 ```
             
-# 集成rocketmq 消息队列
+# Integrate rocketmq message queue
     
-rocketmq配置
+rocketmq configuration
     
 ```
 easy:
@@ -234,20 +232,20 @@ easy:
       nameSrvAddr: localhost:9876
       group: ProducerGroup
       topic: default_topic
-      tag: '*'
+      tag:'*'
     consumer:
       nameSrvAddr: localhost:9876
       group: ConsumerGroup
       topic: default_topic
-      tag: '*'
+      tag:'*'
       
 ```
 
-生产 
+Production 
 
 ```java
 
-开启事务，注入TransactionMQProducer，否则注入
+Open the transaction, inject TransactionMQProducer, otherwise inject
      
 @Autowired
 private TransactionMQProducer transactionMQProducer;
@@ -258,11 +256,11 @@ private DefaultMQProducer defaultMQProducer;
 
 ```
     
-消费 > pull和push两种方式，代码如下
+Consumption> pull and push two ways, the code is as follows
 
 ```java
 
-1、pull, 继承PullConsumerJob即可，run中进行消费
+1. Pull, just inherit PullConsumerJob, and consume in run
      
 @Component
 @Consumer(consumerGroup = "test_consumer_group", topic = "test_topic", namesrvAddr = "")
@@ -276,7 +274,7 @@ public class TestPullConsumerJob extends AbstractPullConsumerJob {
 }
 
      
-2、push，继承PushConsumerJob，创建处理监听器
+2. Push, inherit PushConsumerJob, create processing listener
      
 @Component
 @Consumer(consumerGroup = "test_consumer_group1", topic = "test_topic", namesrvAddr = "", listener = TestPushMessageListener.class)
@@ -293,16 +291,16 @@ public class TestPushMessageListener implements MessageListenerConcurrently {
 }
      
      
- ``` 
+ ```
 
-# 验证码
+# Verification code
 
 ```java
 
 @Component
 public class ServiceImpl extends AbstractImageCode{}
 
-继承抽象类，saveCode、getCode实现验证码的存/取
+Inherit the abstract class, saveCode, getCode to realize the storage/withdrawal of the verification code
 
 
 ```
