@@ -48,24 +48,24 @@ public class LoadThread extends ConsumerLoader {
             }
             check(ParamUtil.returnNotNull(annotation.consumerGroup(), rocketMqConsumerConfig.getGroup()));
             if (bean instanceof AbstractPullConsumerJob) {
-                ((AbstractPullConsumerJob) bean).setConsumer(new DefaultMQPullConsumer(annotation.consumerGroup()));
-                DefaultMQPullConsumer consumer = (DefaultMQPullConsumer) ((AbstractPullConsumerJob) bean).getConsumer();
-                consumer.setNamesrvAddr(annotation.namesrvAddr());
+                DefaultMQPullConsumer defaultMQPullConsumer = new DefaultMQPullConsumer(annotation.consumerGroup());
+                defaultMQPullConsumer.setNamesrvAddr(annotation.namesrvAddr());
+                ((AbstractPullConsumerJob) bean).setConsumer(defaultMQPullConsumer);
             }
             if (bean instanceof AbstractPushConsumerJob) {
-                ((AbstractPushConsumerJob) bean).setConsumer(new DefaultMQPushConsumer(annotation.consumerGroup()));
-                DefaultMQPushConsumer consumer = (DefaultMQPushConsumer) ((AbstractPushConsumerJob) bean).getConsumer();
-                consumer.setNamesrvAddr(annotation.namesrvAddr());
+                DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer(annotation.consumerGroup());
+                defaultMQPushConsumer.setNamesrvAddr(annotation.namesrvAddr());
                 MessageListener messageListener = (MessageListener) applicationContext.getBean(annotation.listener());
                 try {
-                    consumer.subscribe(annotation.topic(), annotation.tag());
+                    defaultMQPushConsumer.subscribe(annotation.topic(), annotation.tag());
                     if (messageListener instanceof MessageListenerConcurrently){
-                        consumer.registerMessageListener((MessageListenerConcurrently)messageListener);
+                        defaultMQPushConsumer.registerMessageListener((MessageListenerConcurrently)messageListener);
                     }else if (messageListener instanceof MessageListenerOrderly){
-                        consumer.registerMessageListener((MessageListenerOrderly)messageListener);
+                        defaultMQPushConsumer.registerMessageListener((MessageListenerOrderly)messageListener);
                     }else {
-                        consumer.registerMessageListener(messageListener);
+                        defaultMQPushConsumer.registerMessageListener(messageListener);
                     }
+                    ((AbstractPushConsumerJob) bean).setConsumer(defaultMQPushConsumer);
                 } catch (MQClientException e) {
                     e.printStackTrace();
                     throw new EasyBusinessException("PushConsumerJob subscribe exception occur");
