@@ -14,11 +14,7 @@ import org.springframework.core.annotation.Order;
 @Data
 @ConfigurationProperties(prefix = "easy.rocketmq.producer")
 @ConditionalOnExpression("!T(org.springframework.util.StringUtils).isEmpty('${easy.rocketmq.producer.nameSrvAddr:}')")
-public class RocketMqProducerConfig {
-    public String nameSrvAddr;
-    public String group;
-    public String topic;
-    public String tag;
+public class RocketMqProducerConfig extends RocketConfig{
 }
 
 

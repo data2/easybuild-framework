@@ -12,11 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = "easy.rocketmq.consumer")
 @ConditionalOnExpression("!T(org.springframework.util.StringUtils).isEmpty('${easy.rocketmq.consumer.nameSrvAddr:}')")
-public class RocketMqConsumerConfig {
-    public String nameSrvAddr;
-    public String group;
-    public String topic;
-    public String tag;
+public class RocketMqConsumerConfig extends RocketConfig{
 }
 
 

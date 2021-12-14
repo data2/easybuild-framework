@@ -46,7 +46,7 @@ public class LoadThread extends ConsumerLoader {
                     throw new EasyBusinessException("consumer namesrvAddr must config, please check your configuration!");
                 }
             }
-            check(ParamUtil.returnNotNull(annotation.consumerGroup(), rocketMqConsumerConfig.group));
+            check(ParamUtil.returnNotNull(annotation.consumerGroup(), rocketMqConsumerConfig.getGroup()));
             if (bean instanceof AbstractPullConsumerJob) {
                 ((AbstractPullConsumerJob) bean).setConsumer(new DefaultMQPullConsumer(annotation.consumerGroup()));
                 DefaultMQPullConsumer consumer = (DefaultMQPullConsumer) ((AbstractPullConsumerJob) bean).getConsumer();
