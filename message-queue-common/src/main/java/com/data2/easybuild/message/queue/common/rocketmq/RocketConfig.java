@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class RocketConfig {
-    private String nameSrvAddr;
-    private String group;
+    private String namesrvAddr;
+    private String consumerGroup;
     private String topic;
     private String tag;
 }
