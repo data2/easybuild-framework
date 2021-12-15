@@ -11,7 +11,10 @@ public class CodeEntity {
     private String validateCode;
 
     CodeEntity() {
+    }
 
+    CodeEntity(String codeId) {
+        this.codeId = codeId;
     }
 
     CodeEntity(String codeId, String validateCode) {

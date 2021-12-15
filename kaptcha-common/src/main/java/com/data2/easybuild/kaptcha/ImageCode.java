@@ -5,24 +5,26 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Objects;
 import java.util.Random;
+import java.util.UUID;
 
 public class ImageCode {
 
-    private String codeId;
-    private String validateCode;
+    private CodeEntity codeEntity;
     private BufferedImage bufferedImage;
 
     ImageCode() {
     }
 
     ImageCode(String codeId) {
-        this.codeId = codeId;
+        this.codeEntity = new CodeEntity(codeId);
     }
 
     public ImageCode createImage() {
         bufferedImage = createBufferedImage();
-        Graphics gps = bufferedImage.getGraphics();//获取当前图片的画笔
+        //获取当前图片的画笔
+        Graphics gps = bufferedImage.getGraphics();
         StringBuilder sb = new StringBuilder();
         //开始画东西
         for (int i = 0; i < 4; i++) {
@@ -30,10 +32,14 @@ public class ImageCode {
             sb.append(ch);
             gps.setColor(this.getColor());
             gps.setFont(this.getFont());
-            gps.drawString(ch, width / 4 * i, height - 5);//宽度让其不满图片
+            //宽度让其不满图片
+            gps.drawString(ch, width / 4 * i, height - 5);
         }
         drawLine(bufferedImage);
-        validateCode = sb.toString();
+        if (Objects.isNull(this.codeEntity)){
+            this.codeEntity = new CodeEntity(UUID.randomUUID().toString());
+        }
+        this.codeEntity.setValidateCode(sb.toString());
         return this;
 
     }
@@ -83,7 +89,7 @@ public class ImageCode {
     }
 
     public CodeEntity getCodeEntity() {
-        return new CodeEntity(codeId, validateCode);
+        return codeEntity;
     }
 
     public BufferedImage getBufferedImage() {
@@ -112,8 +118,6 @@ public class ImageCode {
     public static final String[] font = {"宋体", "华文楷体", "华文隶书", "黑体", "华文新魏"};//字体
     public static final int[] fontSize = {24, 25, 26, 27, 28};
     public static final int[] fontStyle = {0, 1, 2, 3};
-
-
 
 
 }
