@@ -63,15 +63,22 @@ easy:
     producer:
       transaction:
         enable: true
-      nameSrvAddr: localhost:9876
-      group: ProducerGroup
+      namesrvAddr: localhost:9876
       topic: default_topic
       tag: '*'
     consumer:
-      nameSrvAddr: localhost:9876
-      group: ConsumerGroup
+      namesrvAddr: localhost:9876
+      consumerGroup: ConsumerGroup
       topic: default_topic
       tag: '*'
+  kafka:
+    consumer:
+      bootstrapServers: localhost:9876
+      groupId: ConsumerGroup
+      topic: default_topic
+      keyDeserializer:
+      valueDeserializer:
+
   redis:
     redisson:
       file: classpath:redisson.yaml

@@ -18,6 +18,15 @@ public class TestPushMessageListener implements MessageListenerConcurrently {
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
         // DO you business
-        return null;
+//        if (list != null) {
+//            for (MessageExt ext : list) {
+//                try {
+//                    System.out.println(new String(ext.getBody(), RemotingHelper.DEFAULT_CHARSET));
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
 }
