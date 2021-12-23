@@ -20,10 +20,9 @@ public class EasyProducerConfiguration {
     private RocketMqProducerConfig rocketMqProducerConfig;
 
     @Bean
-    @ConditionalOnProperty(prefix = SUBPREFIX, name = "enable", havingValue = "false")
     public DefaultMQProducer defaultMQProducer() throws MQClientException {
-        DefaultMQProducer defaultMQProducer = new DefaultMQProducer(rocketMqProducerConfig.getGroup());
-        defaultMQProducer.setNamesrvAddr(rocketMqProducerConfig.getNameSrvAddr());
+        DefaultMQProducer defaultMQProducer = new DefaultMQProducer();
+        defaultMQProducer.setNamesrvAddr(rocketMqProducerConfig.getNamesrvAddr());
         defaultMQProducer.start();
         return defaultMQProducer;
     }
@@ -31,8 +30,8 @@ public class EasyProducerConfiguration {
     @Bean
     @ConditionalOnProperty(prefix = SUBPREFIX, name = "enable", havingValue = "true")
     public TransactionMQProducer transactionMQProducer() throws MQClientException {
-        TransactionMQProducer transactionMQProducer = new TransactionMQProducer(rocketMqProducerConfig.getGroup());
-        transactionMQProducer.setNamesrvAddr(rocketMqProducerConfig.getNameSrvAddr());
+        TransactionMQProducer transactionMQProducer = new TransactionMQProducer();
+        transactionMQProducer.setNamesrvAddr(rocketMqProducerConfig.getNamesrvAddr());
         transactionMQProducer.start();
         return transactionMQProducer;
     }
