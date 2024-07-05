@@ -1,5 +1,6 @@
 package com.data2.easybuild.redis.common;
 
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2024/7/5 13:46
  */
 @Component
+@Slf4j
 public class DistributeLockDemo {
 
     @Autowired
@@ -23,7 +25,7 @@ public class DistributeLockDemo {
         try {
             lock.tryLock(5000, 10000, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            log.warn("interuppted",e);
         } finally {
             if (lock.isHeldByCurrentThread()) {
                 lock.unlock();
