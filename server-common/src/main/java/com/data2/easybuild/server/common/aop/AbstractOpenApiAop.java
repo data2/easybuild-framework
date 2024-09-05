@@ -1,11 +1,5 @@
 package com.data2.easybuild.server.common.aop;
 
-/**
- * @author data2
- * @description
- * @date 2020/11/27 下午9:30
- */
-
 import com.alibaba.fastjson.JSON;
 import com.data2.easybuild.api.common.dto.AbstractRequest;
 import com.data2.easybuild.api.common.exception.EasyBusinessException;
@@ -27,7 +21,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Date;
 import java.util.Objects;
-
+/**
+ * @author data2
+ * @description
+ * @date 2020/11/27 下午9:30
+ */
 /**
  * 开放接口（RPC或REST API） 服务端统一处理切面
  * - 入参校验：接口请求入参校验
@@ -71,7 +69,6 @@ public abstract class AbstractOpenApiAop {
                 return RestResponse.fail("1", exception.getMessage());
             }
             return RestResponse.fail("9999", "系统异常");
-        } finally {
         }
     }
 
@@ -89,7 +86,7 @@ public abstract class AbstractOpenApiAop {
                     key.append(StringUtils.isEmpty(RequestContext.getHeader("frontId")) ? request.getFrontID() : RequestContext.getHeader("frontId"));
                     break;
                 case REQUEST_HASH:
-                    key.append(String.valueOf(request.toString().hashCode()));
+                    key.append(request.toString().hashCode());
                     break;
             }
             RequestDupIntecept bean = SpringContextHolder.getBean(RequestDupIntecept.class, RequestDupIntecept.NAME);
