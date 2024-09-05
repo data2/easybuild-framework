@@ -17,7 +17,7 @@ public class ExampleApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ExampleApplication.class, args);
 
-        System.out.println(context.getBean(RocketMqProducerConfig.class).getNameSrvAddr());
+        System.out.println(context.getBean(RocketMqProducerConfig.class).getNamesrvAddr());
     }
 
 

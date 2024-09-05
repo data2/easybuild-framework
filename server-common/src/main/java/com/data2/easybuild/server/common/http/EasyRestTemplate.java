@@ -16,20 +16,13 @@ import javax.annotation.PostConstruct;
 
 /**
  * @author data2
- * @description
+ * @description use springboot restTemplate, by httpClient
  * @date 2021/1/28 上午11:25
  */
 @Component
-@Data
-@ConfigurationProperties(prefix = "easy.http")
 public class EasyRestTemplate extends RestTemplate {
 
-    private Integer connectionRequestTimeout;
-    private Integer connectTimeout;
-    private Integer socketTimeout;
-
-    private Integer maxTotal;
-    private Integer defaultMaxPerRoute;
+    private HttpParamConfiguration httpParamConfiguration;
 
     @PostConstruct
     public void easyRestTemplate() {
@@ -49,16 +42,16 @@ public class EasyRestTemplate extends RestTemplate {
     @Bean
     public PoolingHttpClientConnectionManager poolingHttpClientConnectionManager() {
         PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager();
-        poolingHttpClientConnectionManager.setMaxTotal(ParamUtil.nullReturnDefaultVal(connectTimeout, 100));
-        poolingHttpClientConnectionManager.setDefaultMaxPerRoute(ParamUtil.nullReturnDefaultVal(connectTimeout, 100));
+        poolingHttpClientConnectionManager.setMaxTotal(ParamUtil.nullReturnDefaultVal(httpParamConfiguration.getConnectTimeout(), 100));
+        poolingHttpClientConnectionManager.setDefaultMaxPerRoute(ParamUtil.nullReturnDefaultVal(httpParamConfiguration.getConnectTimeout(), 100));
         return poolingHttpClientConnectionManager;
     }
 
     @Bean
     public RequestConfig requestConfig() {
-        return RequestConfig.custom().setConnectionRequestTimeout(ParamUtil.nullReturnDefaultVal(connectionRequestTimeout, 30 * 1000))
-                .setConnectTimeout(ParamUtil.nullReturnDefaultVal(connectTimeout, 60 * 1000))
-                .setSocketTimeout(ParamUtil.nullReturnDefaultVal(socketTimeout, 60 * 1000)).build();
+        return RequestConfig.custom().setConnectionRequestTimeout(ParamUtil.nullReturnDefaultVal(httpParamConfiguration.getConnectionRequestTimeout(), 30 * 1000))
+                .setConnectTimeout(ParamUtil.nullReturnDefaultVal(httpParamConfiguration.getConnectTimeout(), 60 * 1000))
+                .setSocketTimeout(ParamUtil.nullReturnDefaultVal(httpParamConfiguration.getSocketTimeout(), 60 * 1000)).build();
     }
 
     @Bean
