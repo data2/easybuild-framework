@@ -1,14 +1,6 @@
-package com.data2.easybuild.server.common.util;
-
-/**
- * @author data2
- * @description
- * @date 2021/1/29 下午5:15
- */
+package com.data2.easybuild.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
@@ -45,7 +37,7 @@ public class IpUtils {
         try {
             address = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
-            log.error("获取服务器本地ip异常", e);
+            log.error("get server local ip exception ", e);
         }
         return address;
     }

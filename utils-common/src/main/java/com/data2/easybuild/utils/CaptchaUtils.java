@@ -1,11 +1,5 @@
 package com.data2.easybuild.utils;
 
-/**
- * @author data2
- * @description
- * @date 2021/1/29 下午5:03
- */
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.security.SecureRandom;

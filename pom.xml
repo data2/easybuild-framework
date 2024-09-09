@@ -5,7 +5,7 @@
     <packaging>pom</packaging>
     <groupId>com.data2.easybuild</groupId>
     <artifactId>easybuild-framework</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2</version>
     <name>easybuild-framework</name>
     <description>framework for dev</description>
 

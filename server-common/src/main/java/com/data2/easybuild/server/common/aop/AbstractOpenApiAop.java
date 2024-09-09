@@ -10,7 +10,7 @@ import com.data2.easybuild.server.common.env.RequestContext;
 import com.data2.easybuild.server.common.env.ServerLog;
 import com.data2.easybuild.server.common.env.SpringContextHolder;
 import com.data2.easybuild.server.common.lock.RequestDupIntecept;
-import com.data2.easybuild.server.common.util.IpUtils;
+import com.data2.easybuild.utils.IpUtils;
 import jodd.exception.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
