@@ -1,10 +1,4 @@
-package com.data2.easybuild.server.common.util;
-
-/**
- * @author data2
- * @description
- * @date 2021/1/29 下午5:07
- */
+package com.data2.easybuild.utils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

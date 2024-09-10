@@ -1,11 +1,5 @@
 package com.data2.easybuild.utils;
 
-/**
- * @author data2
- * @description
- * @date 2021/1/29 下午5:07
- */
-
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.text.ParseException;
